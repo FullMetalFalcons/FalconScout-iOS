@@ -39,7 +39,7 @@ extension ViewController: CBPeripheralManagerDelegate {
         if error != nil {
             print("error: \(error)")
         } else {
-            self.peripheralManager.startAdvertising(self.getAdvertisementData())
+            self.peripheralManager.startAdvertising(self.advertisementData)
             print("advertising UUID(passkey)")
         }
     }
@@ -60,7 +60,7 @@ extension ViewController: CBPeripheralManagerDelegate {
         self.lblConnectionStatus.text = "Connection status: None"
         self.lblConnectionStatus.textColor = UIColor.redColor()
         print("will start advertising with PASSKEY: \(self.passkey)")
-        self.peripheralManager.startAdvertising(self.getAdvertisementData())
+        self.peripheralManager.startAdvertising(self.advertisementData)
         
     }
     

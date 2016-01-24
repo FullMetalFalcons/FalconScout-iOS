@@ -14,7 +14,7 @@ struct FileUtil {
     internal static var fileContentsTrimmed: [String]! = [String]()
     
     static func loadFileToString() {
-        let path = NSBundle.mainBundle().pathForResource("values", ofType: "txt")
+        let path = NSBundle.mainBundle().pathForResource("config", ofType: "txt")
         var str: NSString!
         do {
             str = try NSString(contentsOfFile: path!, encoding: NSUTF8StringEncoding)
@@ -30,7 +30,7 @@ struct FileUtil {
         var trimmedLines: [String]! = [String]()
         
         for line in lines {
-            if !line.hasPrefix("##") && !line.isEmpty {
+            if !line.hasPrefix("##") && !line.isEmpty && !line.hasPrefix("@"){
                 trimmedLines.append(line)
             }
         }

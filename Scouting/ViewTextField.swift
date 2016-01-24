@@ -70,7 +70,7 @@ extension ViewTextField: UITextFieldDelegate {
                 textField.text = ""
             }
         case ViewController.instance.txtPasskey:
-            ViewController.instance.peripheralManager.stopAdvertising()
+            /*ViewController.instance.peripheralManager.stopAdvertising()
             ViewController.instance.passkey = textField.text
             print("passkey is \(ViewController.instance.passkey)")
             if !isValidID(ViewController.instance.passkey) {
@@ -80,7 +80,8 @@ extension ViewTextField: UITextFieldDelegate {
             UUID_SERVICE = CBUUID(string: ViewController.instance.passkey)
             ViewController.instance.peripheralManager.removeAllServices()
             ViewController.instance.resetPeriphMnger()
-            ViewController.instance.peripheralManager.startAdvertising(ViewController.instance.getAdvertisementData())
+            ViewController.instance.peripheralManager.startAdvertising(ViewController.instance.getAdvertisementData())*/
+            ViewController.instance.refresh(textField.text!)
         default:
             if textField.text == nil {
                 return
@@ -89,4 +90,8 @@ extension ViewTextField: UITextFieldDelegate {
             print("For key: \(self.key), value is: \(textField.text!)")
         }
     }
+}
+
+extension ViewController {
+
 }

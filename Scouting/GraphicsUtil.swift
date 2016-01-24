@@ -31,7 +31,7 @@ extension String {
 }
 
 func alert(message: String) {
-    let alert = UIAlertController(title: "Scouting", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    let alert = UIAlertController(title: "Mistakes were made", message: message, preferredStyle: UIAlertControllerStyle.Alert)
     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: {
         action -> () in
     }))
@@ -39,4 +39,36 @@ func alert(message: String) {
         () -> () in
         print("Alerting: \(message)")
     })
+}
+
+func alert(message: String, timeout: NSTimeInterval) {
+    let alert = UIAlertController(title: "Mistakes were made", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    ViewController.instance.presentViewController(alert, animated: true, completion: {
+        () -> () in
+        print("Alerting: \(message)")
+        NSTimer.scheduledTimerWithTimeInterval(timeout, repeats: false, block: {
+            alert.dismissViewControllerAnimated(true, completion: nil)
+        })
+    })
+}
+
+extension UIView {
+    func startRotating(duration: Double = 1) {
+        let kAnimationKey = "rotation"
+        if self.layer.animationForKey(kAnimationKey) == nil {
+            let animate = CABasicAnimation(keyPath: "transform.rotation")
+            animate.duration = duration
+            animate.repeatCount = Float.infinity
+            animate.fromValue = 0.0
+            animate.toValue = -Float(M_PI * 2.0)
+            self.layer.addAnimation(animate, forKey: kAnimationKey)
+        }
+    }
+    func stopRotating() {
+        let kAnimationKey = "rotation"
+        
+        if self.layer.animationForKey(kAnimationKey) != nil {
+            self.layer.removeAnimationForKey(kAnimationKey)
+        }
+    }
 }

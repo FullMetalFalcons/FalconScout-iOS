@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		EF02491B1C50515400DB6104 /* ViewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF02491A1C50515400DB6104 /* ViewSlider.swift */; };
+		EF6718D81C449EAD0040FF34 /* ViewSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */; };
+		EF9C5D2E1C4762BD009C6573 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9C5D2D1C4762BD009C6573 /* NSTimer+Block.m */; };
 		EFA5FCAA1C3F759F00D7DE26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */; };
 		EFA5FCAC1C3F759F00D7DE26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA5FCAB1C3F759F00D7DE26 /* ViewController.swift */; };
 		EFA5FCAF1C3F759F00D7DE26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA5FCAD1C3F759F00D7DE26 /* Main.storyboard */; };
@@ -22,7 +25,7 @@
 		EFFBC4B81C401630008F41A9 /* ViewStepper.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4B31C401630008F41A9 /* ViewStepper.swift */; };
 		EFFBC4B91C401630008F41A9 /* ViewTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4B41C401630008F41A9 /* ViewTextField.swift */; };
 		EFFBC4BD1C401651008F41A9 /* LoadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4BB1C401651008F41A9 /* LoadFile.swift */; };
-		EFFBC4C11C4016A0008F41A9 /* values.txt in Resources */ = {isa = PBXBuildFile; fileRef = EFFBC4C01C4016A0008F41A9 /* values.txt */; };
+		EFFBC4C11C4016A0008F41A9 /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = EFFBC4C01C4016A0008F41A9 /* config.txt */; };
 		EFFBC4C31C40181F008F41A9 /* BluetoothUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C21C40181F008F41A9 /* BluetoothUtil.swift */; };
 		EFFBC4C51C401FA6008F41A9 /* SendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C41C401FA6008F41A9 /* SendData.swift */; };
 		EFFBC4C91C4020EF008F41A9 /* Periph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C81C4020EF008F41A9 /* Periph.swift */; };
@@ -46,6 +49,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		EF02491A1C50515400DB6104 /* ViewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSlider.swift; sourceTree = "<group>"; };
+		EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSwitch.swift; sourceTree = "<group>"; };
+		EF9C5D2B1C4762BC009C6573 /* Scouting-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Scouting-Bridging-Header.h"; sourceTree = "<group>"; };
+		EF9C5D2C1C4762BD009C6573 /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
+		EF9C5D2D1C4762BD009C6573 /* NSTimer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
 		EFA5FCA61C3F759F00D7DE26 /* Scouting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scouting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		EFA5FCAB1C3F759F00D7DE26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -67,7 +75,7 @@
 		EFFBC4B31C401630008F41A9 /* ViewStepper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewStepper.swift; sourceTree = "<group>"; };
 		EFFBC4B41C401630008F41A9 /* ViewTextField.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewTextField.swift; sourceTree = "<group>"; };
 		EFFBC4BB1C401651008F41A9 /* LoadFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadFile.swift; sourceTree = "<group>"; };
-		EFFBC4C01C4016A0008F41A9 /* values.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = values.txt; sourceTree = "<group>"; };
+		EFFBC4C01C4016A0008F41A9 /* config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.txt; sourceTree = "<group>"; };
 		EFFBC4C21C40181F008F41A9 /* BluetoothUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothUtil.swift; sourceTree = "<group>"; };
 		EFFBC4C41C401FA6008F41A9 /* SendData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendData.swift; sourceTree = "<group>"; };
 		EFFBC4C81C4020EF008F41A9 /* Periph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Periph.swift; sourceTree = "<group>"; };
@@ -99,6 +107,16 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		EF9C5D2F1C4762C3009C6573 /* objc */ = {
+			isa = PBXGroup;
+			children = (
+				EF9C5D2B1C4762BC009C6573 /* Scouting-Bridging-Header.h */,
+				EF9C5D2C1C4762BD009C6573 /* NSTimer+Block.h */,
+				EF9C5D2D1C4762BD009C6573 /* NSTimer+Block.m */,
+			);
+			name = objc;
+			sourceTree = "<group>";
+		};
 		EFA5FC9D1C3F759E00D7DE26 = {
 			isa = PBXGroup;
 			children = (
@@ -123,6 +141,7 @@
 		EFA5FCA81C3F759F00D7DE26 /* Scouting */ = {
 			isa = PBXGroup;
 			children = (
+				EF9C5D2F1C4762C3009C6573 /* objc */,
 				EFFBC4C71C4020D2008F41A9 /* Bluetooth */,
 				EFFBC4BF1C401690008F41A9 /* Resources */,
 				EFFBC4BE1C401681008F41A9 /* ViewControl */,
@@ -155,10 +174,12 @@
 			children = (
 				EFFBC4AC1C4015DF008F41A9 /* GraphicsUtil.swift */,
 				EFFBC4B01C401630008F41A9 /* CustomView.swift */,
+				EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */,
 				EFFBC4B11C401630008F41A9 /* ViewLabel.swift */,
 				EFFBC4B21C401630008F41A9 /* ViewSegCtrl.swift */,
 				EFFBC4B31C401630008F41A9 /* ViewStepper.swift */,
 				EFFBC4B41C401630008F41A9 /* ViewTextField.swift */,
+				EF02491A1C50515400DB6104 /* ViewSlider.swift */,
 			);
 			name = Views;
 			sourceTree = "<group>";
@@ -185,7 +206,7 @@
 		EFFBC4BF1C401690008F41A9 /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				EFFBC4C01C4016A0008F41A9 /* values.txt */,
+				EFFBC4C01C4016A0008F41A9 /* config.txt */,
 				EFA5FCB01C3F759F00D7DE26 /* Assets.xcassets */,
 				EFA5FCB51C3F759F00D7DE26 /* Info.plist */,
 			);
@@ -306,7 +327,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				EFFBC4C11C4016A0008F41A9 /* values.txt in Resources */,
+				EFFBC4C11C4016A0008F41A9 /* config.txt in Resources */,
 				EFA5FCB41C3F759F00D7DE26 /* LaunchScreen.storyboard in Resources */,
 				EFA5FCB11C3F759F00D7DE26 /* Assets.xcassets in Resources */,
 				EFA5FCAF1C3F759F00D7DE26 /* Main.storyboard in Resources */,
@@ -336,7 +357,9 @@
 			files = (
 				EFFBC4BD1C401651008F41A9 /* LoadFile.swift in Sources */,
 				EFA5FCAC1C3F759F00D7DE26 /* ViewController.swift in Sources */,
+				EF9C5D2E1C4762BD009C6573 /* NSTimer+Block.m in Sources */,
 				EFFBC4C51C401FA6008F41A9 /* SendData.swift in Sources */,
+				EF6718D81C449EAD0040FF34 /* ViewSwitch.swift in Sources */,
 				EFFBC4B81C401630008F41A9 /* ViewStepper.swift in Sources */,
 				EFFBC4B91C401630008F41A9 /* ViewTextField.swift in Sources */,
 				EFFBC4C31C40181F008F41A9 /* BluetoothUtil.swift in Sources */,
@@ -346,6 +369,7 @@
 				EFFBC4B71C401630008F41A9 /* ViewSegCtrl.swift in Sources */,
 				EFA5FCAA1C3F759F00D7DE26 /* AppDelegate.swift in Sources */,
 				EFFBC4B61C401630008F41A9 /* ViewLabel.swift in Sources */,
+				EF02491B1C50515400DB6104 /* ViewSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -488,11 +512,14 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Scouting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fmf.Scouting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Scouting/Scouting-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
 		};
@@ -501,11 +528,13 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
 				INFOPLIST_FILE = Scouting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fmf.Scouting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "Scouting/Scouting-Bridging-Header.h";
 			};
 			name = Release;
 		};

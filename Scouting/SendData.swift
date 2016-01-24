@@ -13,6 +13,16 @@ let K_MATCH_NUMBER = "match_num"
 let K_TEAM_COLOR = "team_color"
 
 extension ViewController {
+    var advertisementData: [String : AnyObject] {
+        get {
+            return [
+                CBAdvertisementDataServiceUUIDsKey : [UUID_SERVICE],
+                CBAdvertisementDataIsConnectable : true,
+                CBAdvertisementDataLocalNameKey : "Scouting"
+            ]
+        }
+    }
+    
     func sendData() {
         if self.connectedAndSubscribed {
             if dataToSend == nil {
@@ -84,14 +94,6 @@ extension ViewController {
                 return
             }
         }
-    }
-
-    func getAdvertisementData() -> [String : AnyObject] {
-        return [
-            CBAdvertisementDataServiceUUIDsKey : [UUID_SERVICE],
-            CBAdvertisementDataIsConnectable : true,
-            CBAdvertisementDataLocalNameKey : "Scouting"
-        ]
     }
 }
 

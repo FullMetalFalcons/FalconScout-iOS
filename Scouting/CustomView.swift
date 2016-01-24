@@ -11,6 +11,8 @@ import UIKit
 class CustomView: UIView {
     internal static var height = 50;
     internal static let textSize: CGFloat = 16
+    internal static var colorAlpha: Float = 0.1
+    internal static var nextAvailableY: Int = 0
 
     var title: String
     var key: String
@@ -18,9 +20,9 @@ class CustomView: UIView {
     init(title: String, key: String) {
         self.title = title
         self.key = key
-        super.init(frame: CGRect(x: Int(ViewController.instance.view.frame.minX), y: ViewController.nextAvailableY, width: Int(ViewController.instance.view.frame.width), height: CustomView.height))
-        ViewController.nextAvailableY += CustomView.height
-        ViewController.instance.setViewColor(UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: 0.25))
+        super.init(frame: CGRect(x: Int(ViewController.instance.view.frame.minX), y: CustomView.nextAvailableY, width: Int(ViewController.instance.view.frame.width), height: CustomView.height))
+        CustomView.nextAvailableY += CustomView.height
+        self.backgroundColor = UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: CustomView.colorAlpha)
     }
 
     func add() {

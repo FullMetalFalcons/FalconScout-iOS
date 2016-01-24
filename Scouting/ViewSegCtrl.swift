@@ -42,10 +42,10 @@ extension ViewSegCtrl {
         switch sender.selectedSegmentIndex {
         case 0:
             ViewController.instance.setColor(UIColor.blueColor())
-            ViewController.instance.setViewColor(UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: 0.25))
+            ViewController.instance.setViewColor(UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: CustomView.colorAlpha))
         case 1:
             ViewController.instance.setColor(UIColor.redColor())
-            ViewController.instance.setViewColor(UIColor(colorLiteralRed: 1, green: 0, blue: 0, alpha: 0.25))
+            ViewController.instance.setViewColor(UIColor(colorLiteralRed: 1, green: 0, blue: 0, alpha: CustomView.colorAlpha))
         default: return
         }
     }
