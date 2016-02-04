@@ -8,6 +8,7 @@
 
 import UIKit
 
+var isFirstLaunch = true
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 

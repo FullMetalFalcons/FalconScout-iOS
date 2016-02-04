@@ -15,7 +15,7 @@ class ViewTextField: CustomView {
     
     init(title: String, key: String, type: String) {
         super.init(title: title, key: key)
-        ViewController.arrayTextFieldViews.append(self)
+        ViewControllerMain.arrayTextFieldViews.append(self)
         self.label = UILabel(frame: CGRect(x: self.frame.minX + 5, y: 0, width: self.frame.width * (1/2), height: self.frame.height))
         self.label.font = UIFont.systemFontOfSize(CustomView.textSize)
         self.label.text = "\(title):"
@@ -43,7 +43,7 @@ extension ViewTextField: UITextFieldDelegate {
     
     func textFieldDidEndEditing(textField: UITextField) {
         switch textField {
-        case ViewController.instance.txtTeamNum:
+        case ViewControllerMain.instance.txtTeamNum:
             if let teamNum = Int(textField.text!) {
                 if teamNum > 9999 {
                     alert("That number is too big")
@@ -56,7 +56,7 @@ extension ViewTextField: UITextFieldDelegate {
                 alert("That is not a number")
                 textField.text = ""
             }
-        case ViewController.instance.txtMatchNum:
+        case ViewControllerMain.instance.txtMatchNum:
             if let matchNum = Int(textField.text!) {
                 if matchNum > 99 {
                     alert("There is no way this is match \(matchNum)")
@@ -69,7 +69,7 @@ extension ViewTextField: UITextFieldDelegate {
                 alert("That is not a number")
                 textField.text = ""
             }
-        case ViewController.instance.txtPasskey:
+        case ViewControllerMain.instance.txtPasskey:
             /*ViewController.instance.peripheralManager.stopAdvertising()
             ViewController.instance.passkey = textField.text
             print("passkey is \(ViewController.instance.passkey)")
@@ -81,7 +81,7 @@ extension ViewTextField: UITextFieldDelegate {
             ViewController.instance.peripheralManager.removeAllServices()
             ViewController.instance.resetPeriphMnger()
             ViewController.instance.peripheralManager.startAdvertising(ViewController.instance.getAdvertisementData())*/
-            ViewController.instance.refresh(textField.text!)
+            ViewControllerMain.instance.refresh(textField.text!)
         default:
             if textField.text == nil {
                 return
@@ -90,8 +90,4 @@ extension ViewTextField: UITextFieldDelegate {
             print("For key: \(self.key), value is: \(textField.text!)")
         }
     }
-}
-
-extension ViewController {
-
 }

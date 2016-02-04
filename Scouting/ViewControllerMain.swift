@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class ViewController: UIViewController {
+class ViewControllerMain: UIViewController {
     
     var sendingEOM = false
     var sendDataIndex = 0
@@ -20,7 +20,6 @@ class ViewController: UIViewController {
     var peripheralManager: CBPeripheralManager!
     var characteristic: CBMutableCharacteristic!
     var theService: CBMutableService!
-    
     
     @IBOutlet var scrollView: UIScrollView!
     @IBOutlet var lblConnectionStatus: UILabel!
@@ -33,7 +32,7 @@ class ViewController: UIViewController {
     
     var gestureCloseKeyboard: UITapGestureRecognizer!
     
-    internal static var instance: ViewController!
+    internal static var instance: ViewControllerMain!
     
     internal static var arrayStepperViews: [ViewStepper] = [ViewStepper]()
     internal static var arrayTextFieldViews: [ViewTextField] = [ViewTextField]()
@@ -41,10 +40,16 @@ class ViewController: UIViewController {
     internal static var arrayLabelViews: [ViewLabel] = [ViewLabel]()
     internal static var arraySwitchViews: [ViewSwitch] = [ViewSwitch]()
     internal static var arraySliderViews: [ViewSlider] = [ViewSlider]()
+    internal static var arraySpaceViews: [CustomView] = [CustomView]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        ViewController.instance = self
+        print("Loaded Main View Controller")
+        if isFirstLaunch {
+            ViewControllerMain.instance = self
+            ViewControllerInfo.instance = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("mainStoryboard") as! ViewControllerInfo
+            isFirstLaunch = false
+        }
         self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: "closeKeyboard:")
         self.scrollView.addGestureRecognizer(self.gestureCloseKeyboard)
         self.scrollView.contentSize.height = CGFloat(FileUtil.fileContentsTrimmed.count * CustomView.height) + (self.btnDone.frame.height * 3) + self.segTeamColor.frame.origin.y + 5
@@ -139,7 +144,9 @@ class ViewController: UIViewController {
                     self.failedToBuildInterface("Maleformed text file in SLIDER arguments")
                     return
                 }
-                self.addSlider(Int(args[0])!, upperBound: Int(args[1])!, title: parts[1], key: parts[2])
+                self.addSlider(Int(args[0])!, upperBound: Int(args[1])!, title: parts[1].trim(), key: parts[2].trim())
+            } else if line.hasPrefix("SPACE"){
+                self.addSpace()
             }
         }
         self.setColor(UIColor.blueColor())
@@ -155,21 +162,21 @@ class ViewController: UIViewController {
         self.txtMatchNum.enabled = false
         self.txtTeamNum.enabled = false
         self.txtPasskey.enabled = false
-        for segCtrlView in ViewController.arraySegCtrlViews {
+        for segCtrlView in ViewControllerMain.arraySegCtrlViews {
             segCtrlView.segCtrl.enabled = false
         }
-        for stepperView in ViewController.arrayStepperViews {
+        for stepperView in ViewControllerMain.arrayStepperViews {
             stepperView.stepper.enabled = false
         }
-        for switchView in ViewController.arraySwitchViews {
+        for switchView in ViewControllerMain.arraySwitchViews {
             for sw in switchView.switches {
                 sw.enabled = false
             }
         }
-        for textFieldView in ViewController.arrayTextFieldViews {
+        for textFieldView in ViewControllerMain.arrayTextFieldViews {
             textFieldView.textField.enabled = false
         }
-        for sliderView in ViewController.arraySliderViews {
+        for sliderView in ViewControllerMain.arraySliderViews {
             sliderView.slider.enabled = false
         }
         NSTimer.scheduledTimerWithTimeInterval(2, repeats: false, block: {
@@ -207,7 +214,16 @@ class ViewController: UIViewController {
         ViewSlider(lowerBound: lowerBound, upperBound: upperBound, title: title, key: key).add()
     }
     
+    func addSpace() {
+        let spaceView = CustomView(title: "", key: "")
+        ViewControllerMain.arraySpaceViews.append(spaceView)
+        spaceView.add()
+    }
+    
     func sendData(sender: UIButton) {
+        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentationDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
+        print("\(path)/THINGY.plist")
+        print(KEYS.writeToFile(path, atomically: true))
         if self.connectedAndSubscribed {
             if dataToSend == nil {
                 if KEYS[K_TEAM_NUMBER] as! Int == 0 {
@@ -226,46 +242,49 @@ class ViewController: UIViewController {
     
     func setColor(color: UIColor) {
         self.segTeamColor.tintColor = color
-        for stepperView in ViewController.arrayStepperViews {
+        for stepperView in ViewControllerMain.arrayStepperViews {
             stepperView.stepper.tintColor = color
         }
-        for segCtrlView in ViewController.arraySegCtrlViews {
+        for segCtrlView in ViewControllerMain.arraySegCtrlViews {
             segCtrlView.segCtrl.tintColor = color
         }
-        for switchView in ViewController.arraySwitchViews {
+        for switchView in ViewControllerMain.arraySwitchViews {
             for sw in switchView.switches {
                 sw.tintColor = color
             }
         }
-        for sliderView in ViewController.arraySliderViews {
+        for sliderView in ViewControllerMain.arraySliderViews {
             sliderView.slider.tintColor = color
         }
     }
     
     func setDefaults() {
-        for stepperView in ViewController.arrayStepperViews {
+        for stepperView in ViewControllerMain.arrayStepperViews {
             KEYS[stepperView.key] = "0"
         }
-        for segCtrlView in ViewController.arraySegCtrlViews {
+        for segCtrlView in ViewControllerMain.arraySegCtrlViews {
             segCtrlView.segCtrl.selectedSegmentIndex = 0
-            KEYS[segCtrlView.key] = segCtrlView.segCtrl.titleForSegmentAtIndex(0)
+            KEYS[segCtrlView.key] = segCtrlView.segCtrl.titleForSegmentAtIndex(0) == nil ? "None" : segCtrlView.segCtrl.titleForSegmentAtIndex(0)!
         }
-        for textFieldView in ViewController.arrayTextFieldViews {
+        for textFieldView in ViewControllerMain.arrayTextFieldViews {
             KEYS[textFieldView.key] = ""
             textFieldView.textField.text = ""
         }
-        for stepperView in ViewController.arrayStepperViews {
+        for stepperView in ViewControllerMain.arrayStepperViews {
             stepperView.stepper.value = 0
+            KEYS[stepperView.key] = 0
+            stepperView.label.text = "0"
         }
-        for switchView in ViewController.arraySwitchViews {
+        for switchView in ViewControllerMain.arraySwitchViews {
             for (index, sw) in switchView.switches.enumerate() {
                 sw.on = false
                 KEYS[switchView.keys[index]] = "No"
                 
             }
         }
-        for sliderView in ViewController.arraySliderViews {
+        for sliderView in ViewControllerMain.arraySliderViews {
             sliderView.slider.value = 0
+            KEYS[sliderView.key] = 0
         }
         self.txtTeamNum.text = ""
         self.txtMatchNum.text = ""
@@ -280,29 +299,33 @@ class ViewController: UIViewController {
         KEYS.removeAllObjects()
         self.setDefaults()
         self.setColor(UIColor.blueColor())
+        self.setViewColor(UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: CustomView.colorAlpha))
         self.scrollView.setContentOffset(CGPoint(x: 0, y: 0), animated: true)
     }
     
     
     func setViewColor(color: UIColor) {
         self.scrollView.backgroundColor = color
-        for labelView in ViewController.arrayLabelViews {
+        for labelView in ViewControllerMain.arrayLabelViews {
             labelView.backgroundColor = color
         }
-        for segCtrlView in ViewController.arraySegCtrlViews {
+        for segCtrlView in ViewControllerMain.arraySegCtrlViews {
             segCtrlView.backgroundColor = color
         }
-        for stepperView in ViewController.arrayStepperViews {
+        for stepperView in ViewControllerMain.arrayStepperViews {
             stepperView.backgroundColor = color
         }
-        for textFieldView in ViewController.arrayTextFieldViews {
+        for textFieldView in ViewControllerMain.arrayTextFieldViews {
             textFieldView.backgroundColor = color
         }
-        for switchView in ViewController.arraySwitchViews {
+        for switchView in ViewControllerMain.arraySwitchViews {
             switchView.backgroundColor = color
         }
-        for sliderView in ViewController.arraySliderViews {
+        for sliderView in ViewControllerMain.arraySliderViews {
             sliderView.backgroundColor = color
+        }
+        for spaceView in ViewControllerMain.arraySpaceViews {
+            spaceView.backgroundColor = color
         }
     }
     
@@ -314,7 +337,7 @@ class ViewController: UIViewController {
     func refresh(passkey: String) {
         self.btnRefresh.startRotating(1)
         self.btnRefresh.enabled = false
-        NSTimer.scheduledTimerWithTimeInterval(2, repeats: true, block: {
+        NSTimer.scheduledTimerWithTimeInterval(2, repeats: false, block: {
             _ in
             self.btnRefresh.enabled = true
             self.btnRefresh.stopRotating()
@@ -327,11 +350,15 @@ class ViewController: UIViewController {
             alert("That is not a valid password- it must be 4 characters long, consiting of either numbers 0-9 or letters A-F")
             return
         }
-        UUID_SERVICE = CBUUID(string: self.passkey)
+        UUID_SERVICE = CBUUID(string: "\(self.passkey)5888-16f1-43f8-aa84-63f1544f2694")
         self.peripheralManager.removeAllServices()
         self.resetPeriphMnger()
         self.peripheralManager.startAdvertising(self.advertisementData)
         
+    }
+    
+    @IBAction func infoButtonPressed(sender: UIButton) {
+        self.presentViewController(ViewControllerInfo.instance, animated: true, completion: {})
     }
     
     func closeKeyboard(sender: UITapGestureRecognizer) {

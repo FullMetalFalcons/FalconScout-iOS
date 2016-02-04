@@ -35,7 +35,7 @@ func alert(message: String) {
     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: {
         action -> () in
     }))
-    ViewController.instance.presentViewController(alert, animated: true, completion: {
+    ViewControllerMain.instance.presentViewController(alert, animated: true, completion: {
         () -> () in
         print("Alerting: \(message)")
     })
@@ -43,7 +43,7 @@ func alert(message: String) {
 
 func alert(message: String, timeout: NSTimeInterval) {
     let alert = UIAlertController(title: "Mistakes were made", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-    ViewController.instance.presentViewController(alert, animated: true, completion: {
+    ViewControllerMain.instance.presentViewController(alert, animated: true, completion: {
         () -> () in
         print("Alerting: \(message)")
         NSTimer.scheduledTimerWithTimeInterval(timeout, repeats: false, block: {
@@ -53,7 +53,7 @@ func alert(message: String, timeout: NSTimeInterval) {
 }
 
 extension UIView {
-    func startRotating(duration: Double = 1) {
+    func startRotating(duration: Double) {
         let kAnimationKey = "rotation"
         if self.layer.animationForKey(kAnimationKey) == nil {
             let animate = CABasicAnimation(keyPath: "transform.rotation")

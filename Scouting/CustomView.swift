@@ -20,13 +20,13 @@ class CustomView: UIView {
     init(title: String, key: String) {
         self.title = title
         self.key = key
-        super.init(frame: CGRect(x: Int(ViewController.instance.view.frame.minX), y: CustomView.nextAvailableY, width: Int(ViewController.instance.view.frame.width), height: CustomView.height))
+        super.init(frame: CGRect(x: Int(ViewControllerMain.instance.view.frame.minX), y: CustomView.nextAvailableY, width: Int(ViewControllerMain.instance.view.frame.width), height: CustomView.height))
         CustomView.nextAvailableY += CustomView.height
         self.backgroundColor = UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: CustomView.colorAlpha)
     }
 
     func add() {
-        ViewController.instance.scrollView.addSubview(self)
+        ViewControllerMain.instance.scrollView.addSubview(self)
     }
     
     required init?(coder aDecoder: NSCoder) {

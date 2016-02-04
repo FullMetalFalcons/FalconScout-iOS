@@ -12,7 +12,7 @@ let K_TEAM_NUMBER = "team_num"
 let K_MATCH_NUMBER = "match_num"
 let K_TEAM_COLOR = "team_color"
 
-extension ViewController {
+extension ViewControllerMain {
     var advertisementData: [String : AnyObject] {
         get {
             return [

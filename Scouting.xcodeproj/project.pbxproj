@@ -8,10 +8,11 @@
 
 /* Begin PBXBuildFile section */
 		EF02491B1C50515400DB6104 /* ViewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF02491A1C50515400DB6104 /* ViewSlider.swift */; };
+		EF2370BD1C5C56BC00A72A30 /* ViewControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */; };
 		EF6718D81C449EAD0040FF34 /* ViewSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */; };
 		EF9C5D2E1C4762BD009C6573 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9C5D2D1C4762BD009C6573 /* NSTimer+Block.m */; };
 		EFA5FCAA1C3F759F00D7DE26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */; };
-		EFA5FCAC1C3F759F00D7DE26 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA5FCAB1C3F759F00D7DE26 /* ViewController.swift */; };
+		EFA5FCAC1C3F759F00D7DE26 /* ViewControllerMain.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA5FCAB1C3F759F00D7DE26 /* ViewControllerMain.swift */; };
 		EFA5FCAF1C3F759F00D7DE26 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA5FCAD1C3F759F00D7DE26 /* Main.storyboard */; };
 		EFA5FCB11C3F759F00D7DE26 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = EFA5FCB01C3F759F00D7DE26 /* Assets.xcassets */; };
 		EFA5FCB41C3F759F00D7DE26 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = EFA5FCB21C3F759F00D7DE26 /* LaunchScreen.storyboard */; };
@@ -50,13 +51,14 @@
 
 /* Begin PBXFileReference section */
 		EF02491A1C50515400DB6104 /* ViewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSlider.swift; sourceTree = "<group>"; };
+		EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerInfo.swift; sourceTree = "<group>"; };
 		EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSwitch.swift; sourceTree = "<group>"; };
 		EF9C5D2B1C4762BC009C6573 /* Scouting-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Scouting-Bridging-Header.h"; sourceTree = "<group>"; };
 		EF9C5D2C1C4762BD009C6573 /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
 		EF9C5D2D1C4762BD009C6573 /* NSTimer+Block.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSTimer+Block.m"; sourceTree = "<group>"; };
 		EFA5FCA61C3F759F00D7DE26 /* Scouting.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Scouting.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		EFA5FCAB1C3F759F00D7DE26 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		EFA5FCAB1C3F759F00D7DE26 /* ViewControllerMain.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewControllerMain.swift; sourceTree = "<group>"; };
 		EFA5FCAE1C3F759F00D7DE26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		EFA5FCB01C3F759F00D7DE26 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		EFA5FCB31C3F759F00D7DE26 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
@@ -196,7 +198,8 @@
 			isa = PBXGroup;
 			children = (
 				EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */,
-				EFA5FCAB1C3F759F00D7DE26 /* ViewController.swift */,
+				EFA5FCAB1C3F759F00D7DE26 /* ViewControllerMain.swift */,
+				EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */,
 				EFA5FCAD1C3F759F00D7DE26 /* Main.storyboard */,
 				EFA5FCB21C3F759F00D7DE26 /* LaunchScreen.storyboard */,
 			);
@@ -291,6 +294,7 @@
 				TargetAttributes = {
 					EFA5FCA51C3F759F00D7DE26 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 2PK67JT66C;
 					};
 					EFA5FCB91C3F759F00D7DE26 = {
 						CreatedOnToolsVersion = 7.2;
@@ -356,7 +360,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFFBC4BD1C401651008F41A9 /* LoadFile.swift in Sources */,
-				EFA5FCAC1C3F759F00D7DE26 /* ViewController.swift in Sources */,
+				EFA5FCAC1C3F759F00D7DE26 /* ViewControllerMain.swift in Sources */,
 				EF9C5D2E1C4762BD009C6573 /* NSTimer+Block.m in Sources */,
 				EFFBC4C51C401FA6008F41A9 /* SendData.swift in Sources */,
 				EF6718D81C449EAD0040FF34 /* ViewSwitch.swift in Sources */,
@@ -369,6 +373,7 @@
 				EFFBC4B71C401630008F41A9 /* ViewSegCtrl.swift in Sources */,
 				EFA5FCAA1C3F759F00D7DE26 /* AppDelegate.swift in Sources */,
 				EFFBC4B61C401630008F41A9 /* ViewLabel.swift in Sources */,
+				EF2370BD1C5C56BC00A72A30 /* ViewControllerInfo.swift in Sources */,
 				EF02491B1C50515400DB6104 /* ViewSlider.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -513,11 +518,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Scouting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fmf.Scouting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Scouting/Scouting-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -529,11 +537,14 @@
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				INFOPLIST_FILE = Scouting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = fmf.Scouting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Scouting/Scouting-Bridging-Header.h";
 			};
 			name = Release;

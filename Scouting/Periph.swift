@@ -13,7 +13,7 @@ import UIKit
  Bluetooth peripheral class. See apple documentation for method info
  */
 
-extension ViewController: CBPeripheralManagerDelegate {
+extension ViewControllerMain: CBPeripheralManagerDelegate {
     
     
     func peripheralManagerDidStartAdvertising(peripheral: CBPeripheralManager, error: NSError?) {
@@ -22,7 +22,6 @@ extension ViewController: CBPeripheralManagerDelegate {
     
     func resetPeriphMnger() {
         self.characteristic = CBMutableCharacteristic(type: UUID_CHARACTERISTIC, properties: CBCharacteristicProperties.Notify, value: self.dataToSend, permissions: CBAttributePermissions.Readable)
-        self.characteristic.properties = CBCharacteristicProperties.Notify
         self.theService = CBMutableService(type: UUID_SERVICE, primary: true)
         self.theService.characteristics = [characteristic]
         self.peripheralManager.addService(theService)

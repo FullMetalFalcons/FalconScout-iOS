@@ -11,7 +11,7 @@ import UIKit
 
 
 public var UUID_SERVICE: CBUUID = CBUUID(string: "333B")
-public let UUID_CHARACTERISTIC: CBUUID = CBUUID(string: "200B")
+public let UUID_CHARACTERISTIC: CBUUID = CBUUID(string: "20D0C428-B763-4016-8AC6-4B4B3A6865D9")
 
 public let NOTIFY_MTU: NSInteger = 75
 
