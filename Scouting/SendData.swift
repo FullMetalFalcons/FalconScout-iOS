@@ -7,6 +7,7 @@
 //
 
 import CoreBluetooth
+import UIKit
 
 let K_TEAM_NUMBER = "team_num"
 let K_MATCH_NUMBER = "match_num"
@@ -18,7 +19,7 @@ extension ViewControllerMain {
             return [
                 CBAdvertisementDataServiceUUIDsKey : [UUID_SERVICE],
                 CBAdvertisementDataIsConnectable : true,
-                CBAdvertisementDataLocalNameKey : "Scouting"
+                CBAdvertisementDataLocalNameKey : "Scouting-\(UIDevice.currentDevice().name)"
             ]
         }
     }
@@ -48,17 +49,16 @@ extension ViewControllerMain {
     }
     
     func send() {
-        var data: NSData?
+        var finData: NSData?
         do {
-            data = try NSJSONSerialization.dataWithJSONObject(KEYS, options: NSJSONWritingOptions.PrettyPrinted)
-        } catch _ {
-            data = nil
-        }
+            finData = try NSPropertyListSerialization.dataWithPropertyList(KEYS, format: .XMLFormat_v1_0, options: 0)
+        } catch {}
+        let someStrThing = NSString(data: finData!, encoding: NSUTF8StringEncoding)
+        let data = someStrThing!.dataUsingEncoding(NSUTF8StringEncoding)
         self.dataToSend = (data!.mutableCopy() as! NSMutableData)
         print("size is \(self.dataToSend!.length)")
         if sendingEOM {
             let didSend = self.peripheralManager.updateValue("EOM".dataUsingEncoding(NSUTF8StringEncoding, allowLossyConversion: true)!, forCharacteristic: self.characteristic, onSubscribedCentrals: nil)
-            
             if didSend {
                 startAgain()
                 print("SENT: EOM")
@@ -82,7 +82,7 @@ extension ViewControllerMain {
             if !didSend {
                 return
             }
-            print("SENT: \(NSString(data: chunk, encoding: NSUTF8StringEncoding))")
+            print("SENT: \(NSString(data: chunk, encoding: NSUTF8StringEncoding)!)")
             self.sendDataIndex += amountToSend
             if self.sendDataIndex >= self.dataToSend!.length {
                 sendingEOM = true

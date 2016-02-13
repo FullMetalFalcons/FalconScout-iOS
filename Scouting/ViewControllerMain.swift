@@ -259,8 +259,10 @@ class ViewControllerMain: UIViewController {
     }
     
     func setDefaults() {
+        print("Resseting default values")
         for stepperView in ViewControllerMain.arrayStepperViews {
             KEYS[stepperView.key] = "0"
+            stepperView.stepper.value = 0
         }
         for segCtrlView in ViewControllerMain.arraySegCtrlViews {
             segCtrlView.segCtrl.selectedSegmentIndex = 0
@@ -272,8 +274,7 @@ class ViewControllerMain: UIViewController {
         }
         for stepperView in ViewControllerMain.arrayStepperViews {
             stepperView.stepper.value = 0
-            KEYS[stepperView.key] = 0
-            stepperView.label.text = "0"
+            stepperView.changed(stepperView.stepper)
         }
         for switchView in ViewControllerMain.arraySwitchViews {
             for (index, sw) in switchView.switches.enumerate() {
@@ -354,7 +355,6 @@ class ViewControllerMain: UIViewController {
         self.peripheralManager.removeAllServices()
         self.resetPeriphMnger()
         self.peripheralManager.startAdvertising(self.advertisementData)
-        
     }
     
     @IBAction func infoButtonPressed(sender: UIButton) {

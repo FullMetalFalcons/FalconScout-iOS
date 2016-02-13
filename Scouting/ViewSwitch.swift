@@ -20,7 +20,7 @@ class ViewSwitch: CustomView {
         for (index, name) in switchTitles.enumerate() {
             let xpos = width * CGFloat(index)
             let s = UISwitch(frame: CGRect(x: xpos, y: 17.5, width: width, height: self.frame.height / 4))
-            s.transform = CGAffineTransformMakeScale(CGFloat(1 / (keys.count)) + 0.85, CGFloat(1 / (keys.count)) + 0.85);
+            s.transform = CGAffineTransformMakeScale(CGFloat(1 / (2 * keys.count)) + 0.85, CGFloat(1 / (2 * keys.count)) + 0.85);
             switchToKey[s] = keys[index].trim()
             s.setOn(false, animated: true)
             KEYS[self.keys[index]] = "No"

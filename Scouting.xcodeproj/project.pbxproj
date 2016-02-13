@@ -29,7 +29,7 @@
 		EFFBC4C11C4016A0008F41A9 /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = EFFBC4C01C4016A0008F41A9 /* config.txt */; };
 		EFFBC4C31C40181F008F41A9 /* BluetoothUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C21C40181F008F41A9 /* BluetoothUtil.swift */; };
 		EFFBC4C51C401FA6008F41A9 /* SendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C41C401FA6008F41A9 /* SendData.swift */; };
-		EFFBC4C91C4020EF008F41A9 /* Periph.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C81C4020EF008F41A9 /* Periph.swift */; };
+		EFFBC4C91C4020EF008F41A9 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C81C4020EF008F41A9 /* Peripheral.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -80,7 +80,7 @@
 		EFFBC4C01C4016A0008F41A9 /* config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.txt; sourceTree = "<group>"; };
 		EFFBC4C21C40181F008F41A9 /* BluetoothUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothUtil.swift; sourceTree = "<group>"; };
 		EFFBC4C41C401FA6008F41A9 /* SendData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendData.swift; sourceTree = "<group>"; };
-		EFFBC4C81C4020EF008F41A9 /* Periph.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Periph.swift; sourceTree = "<group>"; };
+		EFFBC4C81C4020EF008F41A9 /* Peripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -221,7 +221,7 @@
 			children = (
 				EFFBC4C41C401FA6008F41A9 /* SendData.swift */,
 				EFFBC4C21C40181F008F41A9 /* BluetoothUtil.swift */,
-				EFFBC4C81C4020EF008F41A9 /* Periph.swift */,
+				EFFBC4C81C4020EF008F41A9 /* Peripheral.swift */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -368,7 +368,7 @@
 				EFFBC4B91C401630008F41A9 /* ViewTextField.swift in Sources */,
 				EFFBC4C31C40181F008F41A9 /* BluetoothUtil.swift in Sources */,
 				EFFBC4B51C401630008F41A9 /* CustomView.swift in Sources */,
-				EFFBC4C91C4020EF008F41A9 /* Periph.swift in Sources */,
+				EFFBC4C91C4020EF008F41A9 /* Peripheral.swift in Sources */,
 				EFFBC4AD1C4015DF008F41A9 /* GraphicsUtil.swift in Sources */,
 				EFFBC4B71C401630008F41A9 /* ViewSegCtrl.swift in Sources */,
 				EFA5FCAA1C3F759F00D7DE26 /* AppDelegate.swift in Sources */,

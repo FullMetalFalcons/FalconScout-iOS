@@ -45,6 +45,7 @@ extension ViewControllerMain: CBPeripheralManagerDelegate {
     
     func peripheralManager(peripheral: CBPeripheralManager, central: CBCentral, didSubscribeToCharacteristic characteristic: CBCharacteristic) {
         print("Central subscribed to characteristic. Max bytes allowed = \(central.maximumUpdateValueLength)")
+        self.btnRefresh.enabled = false
         self.sendDataIndex = 0
         self.connectedAndSubscribed = true
         self.lblConnectionStatus.text = "Connection status: Connected"
@@ -57,6 +58,7 @@ extension ViewControllerMain: CBPeripheralManagerDelegate {
         print("Central unsubscribed from characteristic")
         self.connectedAndSubscribed = false
         self.lblConnectionStatus.text = "Connection status: None"
+        self.btnRefresh.enabled = true
         self.lblConnectionStatus.textColor = UIColor.redColor()
         print("will start advertising with PASSKEY: \(self.passkey)")
         self.peripheralManager.startAdvertising(self.advertisementData)
