@@ -8,7 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		EF02491B1C50515400DB6104 /* ViewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF02491A1C50515400DB6104 /* ViewSlider.swift */; };
+		EF1F10761C7B83400078B2BC /* ViewControllerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1F10751C7B83400078B2BC /* ViewControllerRequest.swift */; };
 		EF2370BD1C5C56BC00A72A30 /* ViewControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */; };
+		EF5E557E1C7634070020A9FE /* ViewControllerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5E557D1C7634070020A9FE /* ViewControllerData.swift */; };
 		EF6718D81C449EAD0040FF34 /* ViewSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */; };
 		EF9C5D2E1C4762BD009C6573 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9C5D2D1C4762BD009C6573 /* NSTimer+Block.m */; };
 		EFA5FCAA1C3F759F00D7DE26 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */; };
@@ -19,6 +21,8 @@
 		EFA5FCBF1C3F759F00D7DE26 /* ScoutingTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA5FCBE1C3F759F00D7DE26 /* ScoutingTests.swift */; };
 		EFA5FCCA1C3F759F00D7DE26 /* ScoutingUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFA5FCC91C3F759F00D7DE26 /* ScoutingUITests.swift */; };
 		EFA5FCD81C3F75E300D7DE26 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA5FCD71C3F75E300D7DE26 /* CoreBluetooth.framework */; };
+		EFAD6B411C7602F800318AD3 /* ViewControllerScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD6B401C7602F800318AD3 /* ViewControllerScout.swift */; };
+		EFB927341C7DF42C002C28EB /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB927331C7DF42C002C28EB /* Util.swift */; };
 		EFFBC4AD1C4015DF008F41A9 /* GraphicsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4AC1C4015DF008F41A9 /* GraphicsUtil.swift */; };
 		EFFBC4B51C401630008F41A9 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4B01C401630008F41A9 /* CustomView.swift */; };
 		EFFBC4B61C401630008F41A9 /* ViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4B11C401630008F41A9 /* ViewLabel.swift */; };
@@ -28,8 +32,7 @@
 		EFFBC4BD1C401651008F41A9 /* LoadFile.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4BB1C401651008F41A9 /* LoadFile.swift */; };
 		EFFBC4C11C4016A0008F41A9 /* config.txt in Resources */ = {isa = PBXBuildFile; fileRef = EFFBC4C01C4016A0008F41A9 /* config.txt */; };
 		EFFBC4C31C40181F008F41A9 /* BluetoothUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C21C40181F008F41A9 /* BluetoothUtil.swift */; };
-		EFFBC4C51C401FA6008F41A9 /* SendData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C41C401FA6008F41A9 /* SendData.swift */; };
-		EFFBC4C91C4020EF008F41A9 /* Peripheral.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C81C4020EF008F41A9 /* Peripheral.swift */; };
+		EFFBC4C91C4020EF008F41A9 /* PeriphManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4C81C4020EF008F41A9 /* PeriphManager.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,7 +54,9 @@
 
 /* Begin PBXFileReference section */
 		EF02491A1C50515400DB6104 /* ViewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSlider.swift; sourceTree = "<group>"; };
+		EF1F10751C7B83400078B2BC /* ViewControllerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerRequest.swift; sourceTree = "<group>"; };
 		EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerInfo.swift; sourceTree = "<group>"; };
+		EF5E557D1C7634070020A9FE /* ViewControllerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerData.swift; sourceTree = "<group>"; };
 		EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSwitch.swift; sourceTree = "<group>"; };
 		EF9C5D2B1C4762BC009C6573 /* Scouting-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Scouting-Bridging-Header.h"; sourceTree = "<group>"; };
 		EF9C5D2C1C4762BD009C6573 /* NSTimer+Block.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSTimer+Block.h"; sourceTree = "<group>"; };
@@ -70,6 +75,8 @@
 		EFA5FCC91C3F759F00D7DE26 /* ScoutingUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoutingUITests.swift; sourceTree = "<group>"; };
 		EFA5FCCB1C3F759F00D7DE26 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		EFA5FCD71C3F75E300D7DE26 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
+		EFAD6B401C7602F800318AD3 /* ViewControllerScout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerScout.swift; sourceTree = "<group>"; };
+		EFB927331C7DF42C002C28EB /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		EFFBC4AC1C4015DF008F41A9 /* GraphicsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicsUtil.swift; sourceTree = "<group>"; };
 		EFFBC4B01C401630008F41A9 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		EFFBC4B11C401630008F41A9 /* ViewLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLabel.swift; sourceTree = "<group>"; };
@@ -79,8 +86,7 @@
 		EFFBC4BB1C401651008F41A9 /* LoadFile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoadFile.swift; sourceTree = "<group>"; };
 		EFFBC4C01C4016A0008F41A9 /* config.txt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = config.txt; sourceTree = "<group>"; };
 		EFFBC4C21C40181F008F41A9 /* BluetoothUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BluetoothUtil.swift; sourceTree = "<group>"; };
-		EFFBC4C41C401FA6008F41A9 /* SendData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendData.swift; sourceTree = "<group>"; };
-		EFFBC4C81C4020EF008F41A9 /* Peripheral.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Peripheral.swift; sourceTree = "<group>"; };
+		EFFBC4C81C4020EF008F41A9 /* PeriphManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeriphManager.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -190,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				EFFBC4BB1C401651008F41A9 /* LoadFile.swift */,
+				EFB927331C7DF42C002C28EB /* Util.swift */,
 			);
 			name = Utilities;
 			sourceTree = "<group>";
@@ -199,7 +206,10 @@
 			children = (
 				EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */,
 				EFA5FCAB1C3F759F00D7DE26 /* ViewControllerMain.swift */,
+				EF1F10751C7B83400078B2BC /* ViewControllerRequest.swift */,
 				EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */,
+				EFAD6B401C7602F800318AD3 /* ViewControllerScout.swift */,
+				EF5E557D1C7634070020A9FE /* ViewControllerData.swift */,
 				EFA5FCAD1C3F759F00D7DE26 /* Main.storyboard */,
 				EFA5FCB21C3F759F00D7DE26 /* LaunchScreen.storyboard */,
 			);
@@ -219,9 +229,8 @@
 		EFFBC4C71C4020D2008F41A9 /* Bluetooth */ = {
 			isa = PBXGroup;
 			children = (
-				EFFBC4C41C401FA6008F41A9 /* SendData.swift */,
 				EFFBC4C21C40181F008F41A9 /* BluetoothUtil.swift */,
-				EFFBC4C81C4020EF008F41A9 /* Peripheral.swift */,
+				EFFBC4C81C4020EF008F41A9 /* PeriphManager.swift */,
 			);
 			name = Bluetooth;
 			sourceTree = "<group>";
@@ -360,21 +369,24 @@
 			buildActionMask = 2147483647;
 			files = (
 				EFFBC4BD1C401651008F41A9 /* LoadFile.swift in Sources */,
+				EFAD6B411C7602F800318AD3 /* ViewControllerScout.swift in Sources */,
 				EFA5FCAC1C3F759F00D7DE26 /* ViewControllerMain.swift in Sources */,
+				EF5E557E1C7634070020A9FE /* ViewControllerData.swift in Sources */,
+				EF1F10761C7B83400078B2BC /* ViewControllerRequest.swift in Sources */,
 				EF9C5D2E1C4762BD009C6573 /* NSTimer+Block.m in Sources */,
-				EFFBC4C51C401FA6008F41A9 /* SendData.swift in Sources */,
 				EF6718D81C449EAD0040FF34 /* ViewSwitch.swift in Sources */,
 				EFFBC4B81C401630008F41A9 /* ViewStepper.swift in Sources */,
 				EFFBC4B91C401630008F41A9 /* ViewTextField.swift in Sources */,
 				EFFBC4C31C40181F008F41A9 /* BluetoothUtil.swift in Sources */,
 				EFFBC4B51C401630008F41A9 /* CustomView.swift in Sources */,
-				EFFBC4C91C4020EF008F41A9 /* Peripheral.swift in Sources */,
+				EFFBC4C91C4020EF008F41A9 /* PeriphManager.swift in Sources */,
 				EFFBC4AD1C4015DF008F41A9 /* GraphicsUtil.swift in Sources */,
 				EFFBC4B71C401630008F41A9 /* ViewSegCtrl.swift in Sources */,
 				EFA5FCAA1C3F759F00D7DE26 /* AppDelegate.swift in Sources */,
 				EFFBC4B61C401630008F41A9 /* ViewLabel.swift in Sources */,
 				EF2370BD1C5C56BC00A72A30 /* ViewControllerInfo.swift in Sources */,
 				EF02491B1C50515400DB6104 /* ViewSlider.swift in Sources */,
+				EFB927341C7DF42C002C28EB /* Util.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -13,7 +13,7 @@ class ViewLabel: CustomView {
     
     init(title: String, type: String, justification: String) {
         super.init(title: title, key: "")
-        ViewControllerMain.arrayLabelViews.append(self)
+        ViewControllerScout.arrayLabelViews.append(self)
         
         self.label = UILabel(frame: CGRect(x:  self.frame.minX, y: 5, width: self.frame.width, height: self.frame.height * (3/4)))
         self.label.text = title

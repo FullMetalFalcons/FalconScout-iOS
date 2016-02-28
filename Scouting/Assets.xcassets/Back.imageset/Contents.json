@@ -2,17 +2,17 @@
   "images" : [
     {
       "idiom" : "universal",
-      "filename" : "refesh_504-1.png",
+      "filename" : "Back-2-2-icon.png",
       "scale" : "1x"
     },
     {
       "idiom" : "universal",
-      "filename" : "refesh_504-2.png",
+      "filename" : "Back-2-2-icon-1.png",
       "scale" : "2x"
     },
     {
       "idiom" : "universal",
-      "filename" : "refesh_504-3.png",
+      "filename" : "Back-2-2-icon-2.png",
       "scale" : "3x"
     }
   ],

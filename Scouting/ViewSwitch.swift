@@ -33,7 +33,7 @@ class ViewSwitch: CustomView {
             self.addSubview(lbl)
             self.addSubview(s)
         }
-        ViewControllerMain.arraySwitchViews.append(self)
+        ViewControllerScout.arraySwitchViews.append(self)
     }
     
     func valueChanged(sender: UISwitch) {

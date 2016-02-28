@@ -11,9 +11,9 @@ import UIKit
 class CustomView: UIView {
     internal static var height = 50;
     internal static let textSize: CGFloat = 16
-    internal static var colorAlpha: Float = 0.1
     internal static var nextAvailableY: Int = 0
-
+    internal static var colorRedForView = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
+    internal static var colorBlueForView = UIColor(red: 0, green: 0, blue: 1, alpha: 0.1)
     var title: String
     var key: String
     
@@ -22,11 +22,12 @@ class CustomView: UIView {
         self.key = key
         super.init(frame: CGRect(x: Int(ViewControllerMain.instance.view.frame.minX), y: CustomView.nextAvailableY, width: Int(ViewControllerMain.instance.view.frame.width), height: CustomView.height))
         CustomView.nextAvailableY += CustomView.height
-        self.backgroundColor = UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: CustomView.colorAlpha)
+        self.backgroundColor = CustomView.colorBlueForView
+    
     }
 
     func add() {
-        ViewControllerMain.instance.scrollView.addSubview(self)
+        ViewControllerScout.instance.scrollView.addSubview(self)
     }
     
     required init?(coder aDecoder: NSCoder) {

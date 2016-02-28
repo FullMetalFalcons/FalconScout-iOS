@@ -14,7 +14,7 @@ class ViewSegCtrl: CustomView {
     
     init(title: String, key: String, elements: [String]) {
         super.init(title: title, key: key)
-        ViewControllerMain.arraySegCtrlViews.append(self)
+        ViewControllerScout.arraySegCtrlViews.append(self)
         self.label = UILabel(frame: CGRect(x: self.frame.minX, y: -15, width: self.frame.width, height: self.frame.height))
         self.label.text = title
         self.label.textAlignment = NSTextAlignment.Center
@@ -41,11 +41,13 @@ extension ViewSegCtrl {
     func segTeamColorChanged(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
-            ViewControllerMain.instance.setColor(UIColor.blueColor())
-            ViewControllerMain.instance.setViewColor(UIColor(colorLiteralRed: 0, green: 0, blue: 1, alpha: CustomView.colorAlpha))
+            ViewControllerScout.instance.setColor(UIColor.blueColor())
+            ViewControllerScout.instance.setViewColor(CustomView.colorBlueForView)
+            KEYS[K_TEAM_COLOR] = "Blue"
         case 1:
-            ViewControllerMain.instance.setColor(UIColor.redColor())
-            ViewControllerMain.instance.setViewColor(UIColor(colorLiteralRed: 1, green: 0, blue: 0, alpha: CustomView.colorAlpha))
+            ViewControllerScout.instance.setColor(UIColor.redColor())
+            ViewControllerScout.instance.setViewColor(CustomView.colorRedForView)
+            KEYS[K_TEAM_COLOR] = "Red"
         default: return
         }
     }

@@ -15,7 +15,7 @@ class ViewSlider : CustomView {
     
     init(lowerBound: Int, upperBound: Int, title: String, key: String) {
         super.init(title: title, key: key)
-        ViewControllerMain.arraySliderViews.append(self)
+        ViewControllerScout.arraySliderViews.append(self)
         self.label = UILabel(frame: CGRect(x: self.frame.minX, y: -12.5, width: self.frame.width, height: self.frame.height))
         self.label.text = title
         self.label.textAlignment = NSTextAlignment.Center

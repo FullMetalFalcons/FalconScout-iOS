@@ -30,12 +30,20 @@ extension String {
     }
 }
 
+func topMostViewController() -> UIViewController {
+    var topCtrller = UIApplication.sharedApplication().keyWindow!.rootViewController
+    while topCtrller!.presentedViewController != nil {
+        topCtrller = topCtrller!.presentedViewController
+    }
+    return topCtrller!
+}
+
 func alert(message: String) {
-    let alert = UIAlertController(title: "Mistakes were made", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    let alert = UIAlertController(title: "Scouting", message: message, preferredStyle: UIAlertControllerStyle.Alert)
     alert.addAction(UIAlertAction(title: "OK", style: UIAlertActionStyle.Cancel, handler: {
         action -> () in
     }))
-    ViewControllerMain.instance.presentViewController(alert, animated: true, completion: {
+    topMostViewController().presentViewController(alert, animated: true, completion: {
         () -> () in
         print("Alerting: \(message)")
     })
@@ -43,7 +51,7 @@ func alert(message: String) {
 
 func alert(message: String, timeout: NSTimeInterval) {
     let alert = UIAlertController(title: "Mistakes were made", message: message, preferredStyle: UIAlertControllerStyle.Alert)
-    ViewControllerMain.instance.presentViewController(alert, animated: true, completion: {
+    topMostViewController().presentViewController(alert, animated: true, completion: {
         () -> () in
         print("Alerting: \(message)")
         NSTimer.scheduledTimerWithTimeInterval(timeout, repeats: false, block: {

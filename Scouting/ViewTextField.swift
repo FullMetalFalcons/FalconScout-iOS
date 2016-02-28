@@ -12,10 +12,11 @@ import CoreBluetooth
 class ViewTextField: CustomView {
     var label: UILabel!
     var textField: UITextField!
+    var type: String!
     
     init(title: String, key: String, type: String) {
         super.init(title: title, key: key)
-        ViewControllerMain.arrayTextFieldViews.append(self)
+        ViewControllerScout.arrayTextFieldViews.append(self)
         self.label = UILabel(frame: CGRect(x: self.frame.minX + 5, y: 0, width: self.frame.width * (1/2), height: self.frame.height))
         self.label.font = UIFont.systemFontOfSize(CustomView.textSize)
         self.label.text = "\(title):"
@@ -24,6 +25,7 @@ class ViewTextField: CustomView {
         self.textField = UITextField(frame: CGRect(x: self.frame.midX, y: 10, width: self.frame.width * (1/2) - 5, height: self.frame.height * (1/2)))
         self.textField.borderStyle = UITextBorderStyle.Bezel
         self.textField.backgroundColor = UIColor.whiteColor()
+        self.type = type.trim()
         switch type.trim() {
         case "decimal": self.textField.keyboardType = UIKeyboardType.DecimalPad
         case "normal": self.textField.keyboardType = UIKeyboardType.Default
@@ -41,9 +43,17 @@ class ViewTextField: CustomView {
 
 extension ViewTextField: UITextFieldDelegate {
     
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.superview!.endEditing(true)
+        return true
+    }
+    
     func textFieldDidEndEditing(textField: UITextField) {
+        
         switch textField {
-        case ViewControllerMain.instance.txtTeamNum:
+        case ViewControllerMain.instance.txtPasskey:
+            ViewControllerMain.instance.refresh(textField.text!)
+        case ViewControllerScout.instance.txtTeamNum:
             if let teamNum = Int(textField.text!) {
                 if teamNum > 9999 {
                     alert("That number is too big")
@@ -56,7 +66,7 @@ extension ViewTextField: UITextFieldDelegate {
                 alert("That is not a number")
                 textField.text = ""
             }
-        case ViewControllerMain.instance.txtMatchNum:
+        case ViewControllerScout.instance.txtMatchNum:
             if let matchNum = Int(textField.text!) {
                 if matchNum > 99 {
                     alert("There is no way this is match \(matchNum)")
@@ -69,19 +79,7 @@ extension ViewTextField: UITextFieldDelegate {
                 alert("That is not a number")
                 textField.text = ""
             }
-        case ViewControllerMain.instance.txtPasskey:
-            /*ViewController.instance.peripheralManager.stopAdvertising()
-            ViewController.instance.passkey = textField.text
-            print("passkey is \(ViewController.instance.passkey)")
-            if !isValidID(ViewController.instance.passkey) {
-                alert("That is not a valid password- it must be 4 characters long, consiting of either numbers 0-9 or letters A-F")
-                return
-            }
-            UUID_SERVICE = CBUUID(string: ViewController.instance.passkey)
-            ViewController.instance.peripheralManager.removeAllServices()
-            ViewController.instance.resetPeriphMnger()
-            ViewController.instance.peripheralManager.startAdvertising(ViewController.instance.getAdvertisementData())*/
-            ViewControllerMain.instance.refresh(textField.text!)
+
         default:
             if textField.text == nil {
                 return

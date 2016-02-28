@@ -19,7 +19,7 @@ class ViewStepper: CustomView {
         self.stepper.maximumValue = Double(upperBound)
         self.addSubview(self.stepper)
 
-        ViewControllerMain.arrayStepperViews.append(self)
+        ViewControllerScout.arrayStepperViews.append(self)
         self.label = UILabel(frame: CGRect(x: self.frame.minX + 5, y: 5, width: self.frame.width * (1/2), height: self.frame.height))
         self.label.font = UIFont.systemFontOfSize(CustomView.textSize)
         self.label.text = "\(title): \(Int(stepper.value))"
