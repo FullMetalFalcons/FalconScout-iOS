@@ -8,15 +8,17 @@
 
 import UIKit
 
-class ViewControllerData: UIViewController {
+class ViewControllerData: UIViewController, UITableViewDelegate, UITableViewDataSource {
     internal static var instance: ViewControllerData!
     
     var sendData: NSData!
     var teamDictionary: NSDictionary!
+    var teamArr = [(key: AnyObject, value: AnyObject)]()
     var teamNum: String!
     var gestureCloseKeyboard: UITapGestureRecognizer!
     
-    @IBOutlet var textView: UITextView!
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         if teamDictionary == nil {
@@ -25,44 +27,67 @@ class ViewControllerData: UIViewController {
         }
         self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: "closeKeyboard:")
         self.view.addGestureRecognizer(self.gestureCloseKeyboard)
+        
+        for (_, val) in self.teamDictionary.enumerate() {
+            print("ADD: index to \(val)")
+            teamArr.append(val)
+        }
+        
+        self.tableView.delegate = self
+        self.tableView.dataSource = self
+        
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return FileUtil.fileContentsTrimmed.count
+    }
+    
+    func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
+    
+        var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
+        let index = indexPath.row
+        let col = self.teamArr[index].key
+        var colStr = "\(col)"
 
-        self.textView.text += "Here is a summary for team \(teamDictionary["team_num"]!):\n\n"
-        self.textView.text += "AUTONOMOUS"
-        self.textView.text += self.total("Times crossed portcullis", self.toIntFromDict("aut_portcullis_yes"), self.toIntFromDict("aut_portcullis_no"))
-        self.textView.text += self.total("Times crossed Cheval Frise", self.toIntFromDict("aut_chevaldefrise_yes"), self.toIntFromDict("aut_chevaldefrise_no"))
-        self.textView.text += self.total("Times crossed Moat", self.toIntFromDict("aut_moat_yes"), self.toIntFromDict("aut_moat_no"))
-        self.textView.text += self.total("Times crossed Ramparts", self.toIntFromDict("aut_ramparts_yes"), self.toIntFromDict("aut_ramparts_no"))
-        self.textView.text += self.total("Times crossed Drawbridge", self.toIntFromDict("aut_drawbridge_yes"), self.toIntFromDict("aut_drawbridge_no"))
-        self.textView.text += self.total("Times crossed Sally Port", self.toIntFromDict("aut_sallyport_yes"), self.toIntFromDict("aut_sallyport_no"))
-        self.textView.text += self.total("Times crossed Rock wall", self.toIntFromDict("aut_rockwall_yes"), self.toIntFromDict("aut_rockwall_no"))
-        self.textView.text += self.total("Times crossed Rough Terrain", self.toIntFromDict("aut_rough_terrain_yes"), self.toIntFromDict("aut_rough_terrain_no"))
-        self.textView.text += "\nTELEOP"
-        self.textView.text += self.total("Times crossed portcullis", self.toIntFromDict("teleop_portcullis_yes"), self.toIntFromDict("teleop_portcullis_no"))
-        self.textView.text += self.total("Times crossed Cheval Frise", self.toIntFromDict("teleop_chevaldefrise_yes"), self.toIntFromDict("teleop_chevaldefrise_no"))
-        self.textView.text += self.total("Times crossed Moat", self.toIntFromDict("teleop_moat_yes"), self.toIntFromDict("teleop_moat_no"))
-        self.textView.text += self.total("Times crossed Ramparts", self.toIntFromDict("teleop_ramparts_yes"), self.toIntFromDict("teleop_ramparts_no"))
-        self.textView.text += self.total("Times crossed Drawbridge", self.toIntFromDict("teleop_drawbridge_yes"), self.toIntFromDict("teleop_drawbridge_no"))
-        self.textView.text += self.total("Times crossed Sally Port", self.toIntFromDict("teleop_sallyport_yes"), self.toIntFromDict("teleop_sallyport_no"))
-        self.textView.text += self.total("Times crossed Rock wall", self.toIntFromDict("teleop_rockwall_yes"), self.toIntFromDict("teleop_rockwall_no"))
-        self.textView.text += self.total("Times crossed Rough Terrain", self.toIntFromDict("teleop_rough_terrain_yes"), self.toIntFromDict("teleop_rough_terrain_no"))
-        
-        self.textView.text += self.total("High goals per total matches", self.toIntFromDict("teleop_shots_highgoal"), self.toIntFromDict("num_matches"))
-        self.textView.text += self.total("Low goals per total matches", self.toIntFromDict("teleop_shots_lowgoal"), self.toIntFromDict("num_matches"))
-        self.textView.text += self.total("Times climbed per total matches", self.toIntFromDict("teleop_climbing_yes"), self.toIntFromDict("num_matches"))
-        self.textView.text += "Average shot accuracy = \(teamDictionary["teleop_shot_accuracy"]!)"
-        self.textView.text += "Total points scored in competition: \(self.toStringFromDict("teleop_total_points"))"
-        
-        
+        var raw: String!
+        var percent: String!
+        if colStr.hasSuffix("_yes") || colStr.hasSuffix("_no") {
+            self.trimYesOrNo(&colStr)
+            let keyTrimY = "\(colStr)_yes"
+            let keyTrimN = "\(colStr)_no"
+            let doubleY = Double("\(self.teamDictionary[keyTrimY]!)")!
+            let doubleN = Double("\(self.teamDictionary[keyTrimN]!)")!
+            raw =  "\(doubleY / (doubleY + doubleN))"
+            percent =  "\(doubleY / (doubleY + doubleN) * 100)"
+        } else {
+            raw = "\(self.teamArr[index].value)"
+            if raw.hasSuffix("}") {
+                raw.remove("}")
+                raw.remove("{")
+            }
+            if let d = Double(raw) {
+                percent = "\(d * 100)"
+            } else {
+                percent = ""
+            }
+        }
+
+        self.build(&cell, col: "\(colStr)", raw: raw, percent: percent)
+        return cell
+    }
+    func trimYesOrNo(inout str: String) {
+        if str.hasSuffix("_no") {
+            str.remove("_no")
+        } else if str.hasSuffix("_yes") {
+            str.remove("_yes")
+        }
     }
     
     @IBAction func btnGoBack(sender: UIButton) {
+        print("GO BACK")
         self.dismissViewControllerAnimated(true, completion: {
             ViewControllerRequest.instance.dismissViewControllerAnimated(true, completion: {})
         })
-    }
-    
-    private func total(name: String, _ i1: Int, _ i2: Int) -> String {
-        return "\(name): \(i1)/\(i1 + i2) = \((Double(i1) / Double(i1 + i2)) * 100)%"
     }
     
     private func toIntFromDict(key: String) -> Int {
@@ -82,7 +107,27 @@ class ViewControllerData: UIViewController {
         ViewControllerData.instance.teamDictionary = dict
     }
     
+    func build(inout cell: UITableViewCell, col: String, raw: String, percent: String) {
+        var lbls = [UILabel]()
+        let tableWidth = self.tableView.frame.width
+        lbls.append(UILabel(frame: CGRect(x: 0, y: 0, width: tableWidth / 3, height: cell.frame.height)))
+        lbls.append(UILabel(frame: CGRect(x: tableWidth / 3, y: 0, width: tableWidth / 3, height: cell.frame.height)))
+        lbls.append(UILabel(frame: CGRect(x: tableWidth * (2/3), y: 0, width: tableWidth / 3, height: cell.frame.height)))
+        lbls[0].text = col
+        lbls[0].textAlignment = NSTextAlignment.Left
+        lbls[1].text = raw
+        lbls[1].textAlignment = NSTextAlignment.Center
+        lbls[2].text = percent
+        lbls[2].textAlignment = NSTextAlignment.Right
+        
+        for lbl in lbls {
+            lbl.font = UIFont.systemFontOfSize(12)
+            cell.addSubview(lbl)
+        }
+    }
+    
     override func prefersStatusBarHidden() -> Bool {
         return true
     }
 }
+

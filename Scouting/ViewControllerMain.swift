@@ -63,8 +63,11 @@ class ViewControllerMain: UIViewController {
     }
     
     func btnStartScouting(sender: UIButton) {
+        self.connectedAndSubscribed = true
         if self.connectedAndSubscribed {
-            self.presentViewController(ViewControllerScout.instance, animated: true, completion: {})
+            self.presentViewController(ViewControllerScout.instance, animated: true, completion: {
+                ViewControllerScout.instance.setDefaults()
+            })
         } else {
             alert("Please connect to a central computer to Scout")
         }

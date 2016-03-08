@@ -12,11 +12,12 @@ class ViewSwitch: CustomView {
     var switches: [UISwitch] = [UISwitch]()
     private var switchToKey = [UISwitch : String]()
     var keys: [String] = [String]()
-    
+    var switchTitles: [String]!
     init(title: String, keys: [String], switchTitles: [String]) {
         super.init(title: title, key: "")
         let width = (self.frame.width / CGFloat(switchTitles.count))
         self.keys = keys
+        self.switchTitles = switchTitles
         for (index, name) in switchTitles.enumerate() {
             let xpos = width * CGFloat(index)
             let s = UISwitch(frame: CGRect(x: xpos, y: 17.5, width: width, height: self.frame.height / 4))

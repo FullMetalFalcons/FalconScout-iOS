@@ -217,11 +217,7 @@ class ViewControllerScout: UIViewController {
     }
     
     func setDefaults() {
-        print("Resseting default values")
-        for stepperView in ViewControllerScout.arrayStepperViews {
-            KEYS[stepperView.key] = "0"
-            stepperView.stepper.value = 0
-        }
+        print("Reseting default values")
         for segCtrlView in ViewControllerScout.arraySegCtrlViews {
             segCtrlView.segCtrl.selectedSegmentIndex = 0
             KEYS[segCtrlView.key] = segCtrlView.segCtrl.titleForSegmentAtIndex(0) == nil ? "None" : segCtrlView.segCtrl.titleForSegmentAtIndex(0)!
@@ -241,12 +237,12 @@ class ViewControllerScout: UIViewController {
         for stepperView in ViewControllerScout.arrayStepperViews {
             stepperView.stepper.value = 0
             stepperView.changed(stepperView.stepper)
+            KEYS[stepperView.key] = stepperView.stepper.value
         }
         for switchView in ViewControllerScout.arraySwitchViews {
             for (index, sw) in switchView.switches.enumerate() {
                 sw.on = false
                 KEYS[switchView.keys[index]] = "No"
-                
             }
         }
         for sliderView in ViewControllerScout.arraySliderViews {

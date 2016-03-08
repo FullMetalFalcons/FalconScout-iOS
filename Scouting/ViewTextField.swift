@@ -19,7 +19,7 @@ class ViewTextField: CustomView {
         ViewControllerScout.arrayTextFieldViews.append(self)
         self.label = UILabel(frame: CGRect(x: self.frame.minX + 5, y: 0, width: self.frame.width * (1/2), height: self.frame.height))
         self.label.font = UIFont.systemFontOfSize(CustomView.textSize)
-        self.label.text = "\(title):"
+        self.label.text = "\(title)"
         self.addSubview(self.label)
         
         self.textField = UITextField(frame: CGRect(x: self.frame.midX, y: 10, width: self.frame.width * (1/2) - 5, height: self.frame.height * (1/2)))
@@ -48,8 +48,13 @@ extension ViewTextField: UITextFieldDelegate {
         return true
     }
     
-    func textFieldDidEndEditing(textField: UITextField) {
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
         
+        return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
         switch textField {
         case ViewControllerMain.instance.txtPasskey:
             ViewControllerMain.instance.refresh(textField.text!)
@@ -68,7 +73,7 @@ extension ViewTextField: UITextFieldDelegate {
             }
         case ViewControllerScout.instance.txtMatchNum:
             if let matchNum = Int(textField.text!) {
-                if matchNum > 99 {
+                if matchNum > 200 {
                     alert("There is no way this is match \(matchNum)")
                     textField.text = ""
                 } else {
@@ -79,7 +84,6 @@ extension ViewTextField: UITextFieldDelegate {
                 alert("That is not a number")
                 textField.text = ""
             }
-
         default:
             if textField.text == nil {
                 return
