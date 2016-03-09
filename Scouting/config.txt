@@ -81,7 +81,7 @@ SEGMENTED_CONTROL 	<Sallyport,Drawbridge>;;				Which Category C Defense is on th
 STEPPER 			<0,99>;;								Times crossed;;									teleop_catC_timesCrossed
 SEGMENTED_CONTROL 	<Rockwall,Rough Terrain>;;				Which Category D Defense is on the Field?;;		teleop_catD_defense
 STEPPER 			<0,99>;;								Times crossed;;									teleop_catD_timesCrossed
-SEGMENTED_CONTROL 	<No,Yes,Try/Fail>;;						Can pass under low bar;;						teleop_underLowBar
+STEPPER 		 	<0,99>;;								Times through lowbar;;							teleop_lowbarCrossed
 SEGMENTED_CONTROL 	<No,Yes,Try/Fail>;;						Can Climb?;;									teleop_climbing
 SEGMENTED_CONTROL 	<No,Yes>;;								Is a defender bot?;;							teleop_defender_bot
 STEPPER 			<0,99>;;								Scored High Goal;;								teleop_shots_highgoal
@@ -116,9 +116,7 @@ SPACE
 ##          - SLIDER - See: STEPPER
 ##      If an Element besides the ones listed above is used, the program will replace its value with 0.
 
-@EQUATION AUTONOMOUS=(aut_reaches_defenses+aut_portcullis+aut_chevalDeFrise+aut_moat+aut_ramparts+aut_drawbridge+aut_sallyport+aut_rockwall+aut_rough_terrain)/9
-@EQUATION TELEOP=(teleop_portcullis+teleop_chevalDeFrise+teleop_moat+teleop_ramparts+teleop_drawbridge+teleop_sallyport+teleop_rockwall+teleop_rough_terrain)/8
-@EQUATION HUMAN=0
+@EQUATION OVERALL_SCORE=(teleop_catA_timesCrossed+teleop_catB_timesCrossed+teleop_catC_timesCrossed+teleop_catD_timesCrossed+teleop_lowbarCrossed+2*teleop_shots_highgoal+teleop_shots_lowgoal)/8
 
 ## --------EXTRA HELP--------
 ## If you find yourself still confused as to how you should edit this file, you can find an instructional video below
