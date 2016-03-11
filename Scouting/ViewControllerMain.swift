@@ -68,6 +68,10 @@ class ViewControllerMain: UIViewController {
         if CGColorEqualToColor(touchColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor) {
             return
         }
+        sender.setBackgroundImage(UIImage(named: "Red-Left-Down"), forState: UIControlState.Normal)
+        NSTimer.scheduledTimerWithTimeInterval(0.1, repeats: false, block: {
+            sender.setBackgroundImage(UIImage(named: "Red-Left-Up"), forState: UIControlState.Normal)
+        })
         if self.connectedAndSubscribed {
             self.presentViewController(ViewControllerScout.instance, animated: true, completion: {
                 ViewControllerScout.instance.setDefaults()
@@ -83,6 +87,10 @@ class ViewControllerMain: UIViewController {
         if CGColorEqualToColor(touchColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor) {
             return
         }
+        sender.setBackgroundImage(UIImage(named: "Blue-Right-Down"), forState: UIControlState.Normal)
+        NSTimer.scheduledTimerWithTimeInterval(0.1, repeats: false, block: {
+            sender.setBackgroundImage(UIImage(named: "Blue-Right-Up"), forState: UIControlState.Normal)
+        })
         if self.connectedAndSubscribed {
             self.presentViewController(ViewControllerRequest.instance, animated: true, completion: {})
         } else {
