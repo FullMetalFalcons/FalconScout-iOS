@@ -61,6 +61,20 @@ extension ViewControllerMain: CBPeripheralManagerDelegate {
         self.lblConnectionStatus.textColor = UIColor.redColor()
         print("will start advertising with PASSKEY: \(self.passkey)")
         self.peripheralManager.startAdvertising(self.advertisementData)
+        switch topMostViewController() {
+        case ViewControllerScout.instance:
+            alert("Lost connection to computer", completion: {
+                ViewControllerScout.instance.dismissViewControllerAnimated(true, completion: {})
+            })
+            break
+        case ViewControllerData.instance:
+            alert("Lost connection to computer", completion: {
+                ViewControllerData.instance.dismissViewControllerAnimated(true, completion: {})
+            })
+            break
+        default:
+            break
+        }
     }
     
     func peripheralManager(peripheral: CBPeripheralManager, didReceiveReadRequest request: CBATTRequest) {

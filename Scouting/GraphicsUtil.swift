@@ -50,13 +50,24 @@ func alert(message: String) {
 }
 
 func alert(message: String, timeout: NSTimeInterval) {
-    let alert = UIAlertController(title: "Mistakes were made", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    let alert = UIAlertController(title: "Scouting", message: message, preferredStyle: UIAlertControllerStyle.Alert)
     topMostViewController().presentViewController(alert, animated: true, completion: {
         () -> () in
         print("Alerting: \(message)")
         NSTimer.scheduledTimerWithTimeInterval(timeout, repeats: false, block: {
             alert.dismissViewControllerAnimated(true, completion: nil)
         })
+    })
+}
+
+func alert(message: String, completion: () -> ()) {
+    let alert = UIAlertController(title: "Scouting", message: message, preferredStyle: UIAlertControllerStyle.Alert)
+    alert.addAction(UIAlertAction(title: "Ok", style: UIAlertActionStyle.Cancel, handler: {
+        action -> () in
+        completion()
+    }))
+    topMostViewController().presentViewController(alert, animated: true, completion: {
+        print("Alerting: \(message)")
     })
 }
 

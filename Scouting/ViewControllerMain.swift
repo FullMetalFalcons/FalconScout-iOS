@@ -57,12 +57,17 @@ class ViewControllerMain: UIViewController {
         self.view.addGestureRecognizer(self.gestureCloseKeyboard)
         self.txtPasskey.keyboardType = UIKeyboardType.NamePhonePad
         self.txtPasskey.delegate = ViewTextField(title: "passkey", key: "", type: "normal")
-        self.btnScout.addTarget(self, action: "btnStartScouting:", forControlEvents: UIControlEvents.TouchDown)
-        self.btnRetrieveData.addTarget(self, action: "btnStartRetrievingData:", forControlEvents: UIControlEvents.TouchDown)
+        self.btnScout.addTarget(self, action: "btnStartScouting:event:", forControlEvents: UIControlEvents.TouchDown)
+        self.btnRetrieveData.addTarget(self, action: "btnStartRetrievingData:event:", forControlEvents: UIControlEvents.TouchDown)
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
     }
     
-    func btnStartScouting(sender: UIButton) {
+    func btnStartScouting(sender: UIButton, event: UIEvent) {
+        let location = event.touchesForView(sender)!.first!.locationInView(sender)
+        let touchColor = self.colorOfPoint(sender, point: location)
+        if CGColorEqualToColor(touchColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor) {
+            return
+        }
         if self.connectedAndSubscribed {
             self.presentViewController(ViewControllerScout.instance, animated: true, completion: {
                 ViewControllerScout.instance.setDefaults()
@@ -72,7 +77,12 @@ class ViewControllerMain: UIViewController {
         }
     }
     
-    func btnStartRetrievingData(sender: UIButton) {
+    func btnStartRetrievingData(sender: UIButton, event: UIEvent) {
+        let location = event.touchesForView(sender)!.first!.locationInView(sender)
+        let touchColor = self.colorOfPoint(sender, point: location)
+        if CGColorEqualToColor(touchColor, UIColor(red: 0, green: 0, blue: 0, alpha: 0).CGColor) {
+            return
+        }
         if self.connectedAndSubscribed {
             self.presentViewController(ViewControllerRequest.instance, animated: true, completion: {})
         } else {
@@ -80,6 +90,23 @@ class ViewControllerMain: UIViewController {
         }
     }
     
+    private func colorOfPoint(view: UIView, point:CGPoint) -> CGColor {
+        var pixel:[CUnsignedChar] = [0,0,0,0]
+        let colorSpace = CGColorSpaceCreateDeviceRGB()
+        let bitmapInfo = CGBitmapInfo(rawValue: CGImageAlphaInfo.PremultipliedLast.rawValue)
+        let context = CGBitmapContextCreate(&pixel, 1, 1, 8, 4, colorSpace, bitmapInfo.rawValue)
+        CGContextTranslateCTM(context, -point.x, -point.y)
+        view.layer.renderInContext(context!)
+        let red:CGFloat = CGFloat(pixel[0])/255.0
+        let green:CGFloat = CGFloat(pixel[1])/255.0
+        let blue:CGFloat = CGFloat(pixel[2])/255.0
+        let alpha:CGFloat = CGFloat(pixel[3])/255.0
+        
+        let color = UIColor(red:red, green: green, blue:blue, alpha:alpha)
+        
+        return color.CGColor
+    }
+
     @IBAction func btnRefresh(sender: UIButton) {
         print("Refreshing...")
         self.refresh(self.passkey)
@@ -109,12 +136,9 @@ class ViewControllerMain: UIViewController {
     
     
     func sendData(sender: UIButton) {
-        let path = NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentationDirectory, NSSearchPathDomainMask.UserDomainMask, true)[0]
-        print("\(path)/THINGY.plist")
-        print(KEYS.writeToFile(path, atomically: true))
         if ViewControllerMain.instance.connectedAndSubscribed {
             if dataToSend == nil {
-                if KEYS[K_TEAM_NUMBER] as! Int == 0 {
+                if KEYS[K_TEAM_NUMBER] == nil {
                     alert("Please input the team number again")
                     return
                 }

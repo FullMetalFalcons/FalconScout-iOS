@@ -1,9 +1,5 @@
-## Abandon All Hope Ye Who Edit Here
-
-## TEAM 4557 Scouting Program Configuration - AKA The Beast
-
+## TEAM 4557 Scouting Program Configuration
 ## Lines that begin with "##" will not be read by the program, they are considered comments
-
 ## To you who are
 
 ##
@@ -91,9 +87,9 @@ STEPPER 			<0,99>;;								Fouls;;											teleop_fouls
 TEXTFIELD 			<number>;;								Total Points;;									teleop_total_points
 TEXTFIELD 			<normal>;;								Final Thoughts?;;								teleop_general_info
 
-LABEL 				<distinguished, center>;;				Human Players
-SEGMENTED_CONTROL 	<No, Yes>;;								Can team utilize gestures?;;					human_uses_gestures
-SLIDER 				<0,10>;;								Is the human player effective?;;				human_effective
+SPACE
+SPACE
+SPACE
 SPACE
 
 ## --------END INTERFACE STUFF--------
@@ -117,7 +113,3 @@ SPACE
 ##      If an Element besides the ones listed above is used, the program will replace its value with 0.
 
 @EQUATION OVERALL_SCORE=(teleop_catA_timesCrossed+teleop_catB_timesCrossed+teleop_catC_timesCrossed+teleop_catD_timesCrossed+teleop_lowbarCrossed+2*teleop_shots_highgoal+teleop_shots_lowgoal)/8
-
-## --------EXTRA HELP--------
-## If you find yourself still confused as to how you should edit this file, you can find an instructional video below
-## https://youtu.be/dQw4w9WgXcQ
