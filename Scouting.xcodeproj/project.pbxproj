@@ -10,6 +10,7 @@
 		EF02491B1C50515400DB6104 /* ViewSlider.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF02491A1C50515400DB6104 /* ViewSlider.swift */; };
 		EF1F10761C7B83400078B2BC /* ViewControllerRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF1F10751C7B83400078B2BC /* ViewControllerRequest.swift */; };
 		EF2370BD1C5C56BC00A72A30 /* ViewControllerInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */; };
+		EF5046821C962D21005549B6 /* ViewControllerTeams.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5046811C962D21005549B6 /* ViewControllerTeams.swift */; };
 		EF5E557E1C7634070020A9FE /* ViewControllerData.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF5E557D1C7634070020A9FE /* ViewControllerData.swift */; };
 		EF6718D81C449EAD0040FF34 /* ViewSwitch.swift in Sources */ = {isa = PBXBuildFile; fileRef = EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */; };
 		EF9C5D2E1C4762BD009C6573 /* NSTimer+Block.m in Sources */ = {isa = PBXBuildFile; fileRef = EF9C5D2D1C4762BD009C6573 /* NSTimer+Block.m */; };
@@ -23,6 +24,7 @@
 		EFA5FCD81C3F75E300D7DE26 /* CoreBluetooth.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = EFA5FCD71C3F75E300D7DE26 /* CoreBluetooth.framework */; };
 		EFAD6B411C7602F800318AD3 /* ViewControllerScout.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFAD6B401C7602F800318AD3 /* ViewControllerScout.swift */; };
 		EFB927341C7DF42C002C28EB /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFB927331C7DF42C002C28EB /* Util.swift */; };
+		EFF5F5971CACB1FB00DB0FF0 /* ViewControllerPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFF5F5961CACB1FB00DB0FF0 /* ViewControllerPicker.swift */; };
 		EFFBC4AD1C4015DF008F41A9 /* GraphicsUtil.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4AC1C4015DF008F41A9 /* GraphicsUtil.swift */; };
 		EFFBC4B51C401630008F41A9 /* CustomView.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4B01C401630008F41A9 /* CustomView.swift */; };
 		EFFBC4B61C401630008F41A9 /* ViewLabel.swift in Sources */ = {isa = PBXBuildFile; fileRef = EFFBC4B11C401630008F41A9 /* ViewLabel.swift */; };
@@ -56,6 +58,7 @@
 		EF02491A1C50515400DB6104 /* ViewSlider.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSlider.swift; sourceTree = "<group>"; };
 		EF1F10751C7B83400078B2BC /* ViewControllerRequest.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerRequest.swift; sourceTree = "<group>"; };
 		EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerInfo.swift; sourceTree = "<group>"; };
+		EF5046811C962D21005549B6 /* ViewControllerTeams.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerTeams.swift; sourceTree = "<group>"; };
 		EF5E557D1C7634070020A9FE /* ViewControllerData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerData.swift; sourceTree = "<group>"; };
 		EF6718D71C449EAD0040FF34 /* ViewSwitch.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewSwitch.swift; sourceTree = "<group>"; };
 		EF9C5D2B1C4762BC009C6573 /* Scouting-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Scouting-Bridging-Header.h"; sourceTree = "<group>"; };
@@ -77,6 +80,7 @@
 		EFA5FCD71C3F75E300D7DE26 /* CoreBluetooth.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreBluetooth.framework; path = System/Library/Frameworks/CoreBluetooth.framework; sourceTree = SDKROOT; };
 		EFAD6B401C7602F800318AD3 /* ViewControllerScout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerScout.swift; sourceTree = "<group>"; };
 		EFB927331C7DF42C002C28EB /* Util.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
+		EFF5F5961CACB1FB00DB0FF0 /* ViewControllerPicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewControllerPicker.swift; sourceTree = "<group>"; };
 		EFFBC4AC1C4015DF008F41A9 /* GraphicsUtil.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GraphicsUtil.swift; sourceTree = "<group>"; };
 		EFFBC4B01C401630008F41A9 /* CustomView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomView.swift; sourceTree = "<group>"; };
 		EFFBC4B11C401630008F41A9 /* ViewLabel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewLabel.swift; sourceTree = "<group>"; };
@@ -149,10 +153,11 @@
 		EFA5FCA81C3F759F00D7DE26 /* Scouting */ = {
 			isa = PBXGroup;
 			children = (
+				EFF5F5981CACB20B00DB0FF0 /* Main */,
 				EF9C5D2F1C4762C3009C6573 /* objc */,
 				EFFBC4C71C4020D2008F41A9 /* Bluetooth */,
 				EFFBC4BF1C401690008F41A9 /* Resources */,
-				EFFBC4BE1C401681008F41A9 /* ViewControl */,
+				EFFBC4BE1C401681008F41A9 /* ViewControllers */,
 				EFFBC4AF1C4015ED008F41A9 /* Utilities */,
 				EFFBC4AE1C4015E9008F41A9 /* Views */,
 			);
@@ -175,6 +180,14 @@
 				EFA5FCCB1C3F759F00D7DE26 /* Info.plist */,
 			);
 			path = ScoutingUITests;
+			sourceTree = "<group>";
+		};
+		EFF5F5981CACB20B00DB0FF0 /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 		EFFBC4AE1C4015E9008F41A9 /* Views */ = {
@@ -201,19 +214,18 @@
 			name = Utilities;
 			sourceTree = "<group>";
 		};
-		EFFBC4BE1C401681008F41A9 /* ViewControl */ = {
+		EFFBC4BE1C401681008F41A9 /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				EFA5FCA91C3F759F00D7DE26 /* AppDelegate.swift */,
 				EFA5FCAB1C3F759F00D7DE26 /* ViewControllerMain.swift */,
 				EF1F10751C7B83400078B2BC /* ViewControllerRequest.swift */,
+				EFF5F5961CACB1FB00DB0FF0 /* ViewControllerPicker.swift */,
 				EF2370BC1C5C56BC00A72A30 /* ViewControllerInfo.swift */,
 				EFAD6B401C7602F800318AD3 /* ViewControllerScout.swift */,
 				EF5E557D1C7634070020A9FE /* ViewControllerData.swift */,
-				EFA5FCAD1C3F759F00D7DE26 /* Main.storyboard */,
-				EFA5FCB21C3F759F00D7DE26 /* LaunchScreen.storyboard */,
+				EF5046811C962D21005549B6 /* ViewControllerTeams.swift */,
 			);
-			name = ViewControl;
+			name = ViewControllers;
 			sourceTree = "<group>";
 		};
 		EFFBC4BF1C401690008F41A9 /* Resources */ = {
@@ -222,6 +234,8 @@
 				EFFBC4C01C4016A0008F41A9 /* config.txt */,
 				EFA5FCB01C3F759F00D7DE26 /* Assets.xcassets */,
 				EFA5FCB51C3F759F00D7DE26 /* Info.plist */,
+				EFA5FCAD1C3F759F00D7DE26 /* Main.storyboard */,
+				EFA5FCB21C3F759F00D7DE26 /* LaunchScreen.storyboard */,
 			);
 			name = Resources;
 			sourceTree = "<group>";
@@ -303,7 +317,7 @@
 				TargetAttributes = {
 					EFA5FCA51C3F759F00D7DE26 = {
 						CreatedOnToolsVersion = 7.2;
-						DevelopmentTeam = 2PK67JT66C;
+						DevelopmentTeam = SAV845C7E7;
 					};
 					EFA5FCB91C3F759F00D7DE26 = {
 						CreatedOnToolsVersion = 7.2;
@@ -379,12 +393,14 @@
 				EFFBC4B91C401630008F41A9 /* ViewTextField.swift in Sources */,
 				EFFBC4C31C40181F008F41A9 /* BluetoothUtil.swift in Sources */,
 				EFFBC4B51C401630008F41A9 /* CustomView.swift in Sources */,
+				EFF5F5971CACB1FB00DB0FF0 /* ViewControllerPicker.swift in Sources */,
 				EFFBC4C91C4020EF008F41A9 /* PeriphManager.swift in Sources */,
 				EFFBC4AD1C4015DF008F41A9 /* GraphicsUtil.swift in Sources */,
 				EFFBC4B71C401630008F41A9 /* ViewSegCtrl.swift in Sources */,
 				EFA5FCAA1C3F759F00D7DE26 /* AppDelegate.swift in Sources */,
 				EFFBC4B61C401630008F41A9 /* ViewLabel.swift in Sources */,
 				EF2370BD1C5C56BC00A72A30 /* ViewControllerInfo.swift in Sources */,
+				EF5046821C962D21005549B6 /* ViewControllerTeams.swift in Sources */,
 				EF02491B1C50515400DB6104 /* ViewSlider.swift in Sources */,
 				EFB927341C7DF42C002C28EB /* Util.swift in Sources */,
 			);
@@ -535,7 +551,7 @@
 				INFOPLIST_FILE = Scouting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = fmf.Scouting;
+				PRODUCT_BUNDLE_IDENTIFIER = fmf.FalconScouting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Scouting/Scouting-Bridging-Header.h";
@@ -554,7 +570,7 @@
 				INFOPLIST_FILE = Scouting/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = fmf.Scouting;
+				PRODUCT_BUNDLE_IDENTIFIER = fmf.FalconScouting;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "Scouting/Scouting-Bridging-Header.h";

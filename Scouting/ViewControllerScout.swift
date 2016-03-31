@@ -29,20 +29,22 @@ class ViewControllerScout: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: "closeKeyboard:")
+        self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: #selector(ViewControllerScout.closeKeyboard(_:)))
         print("Loaded Scout View Controller")
         self.scrollView.addGestureRecognizer(self.gestureCloseKeyboard)
         self.scrollView.contentSize.height = CGFloat(FileUtil.fileContentsTrimmed.count * CustomView.height) + (self.btnDone.frame.height * 3) + self.segTeamColor.frame.origin.y + 5
         CustomView.nextAvailableY = Int(self.segTeamColor.frame.origin.y / 2)
         self.btnDone.frame = CGRect(x: self.btnDone.frame.origin.x, y: self.scrollView.contentSize.height - self.btnDone.frame.height - 5, width: self.btnDone.frame.width, height: self.btnDone.frame.height)
-        self.btnDone.addTarget(ViewControllerMain.instance, action: "sendData:", forControlEvents: UIControlEvents.TouchDown)
+        self.btnDone.addTarget(ViewControllerMain.instance, action: #selector(ViewControllerMain.instance.sendData(_:)), forControlEvents: UIControlEvents.TouchDown)
+//        "sendData:"
         self.txtTeamNum.keyboardType = UIKeyboardType.NumberPad
         self.txtMatchNum.keyboardType = UIKeyboardType.NumberPad
         self.txtTeamNum.delegate = ViewTextField(title: "teamnum", key: "", type: "number")
         self.txtMatchNum.delegate = ViewTextField(title: "matchnum", key: "", type: "number")
-        self.segTeamColor.addTarget(ViewSegCtrl(title: "teamcolor", key: "", elements: ["Red", "Blue"]), action: "segTeamColorChanged:", forControlEvents: UIControlEvents.ValueChanged)
+        let vscInstance = ViewSegCtrl(title: "teamcolor", key: "", elements: ["Red", "Blue"])
+        self.segTeamColor.addTarget(vscInstance, action: #selector(vscInstance.segTeamColorChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.segTeamColor.selectedSegmentIndex = 0
-        
+        //"segTeamColorChanged:"
         for var line in FileUtil.fileContentsTrimmed {
             if line.hasPrefix("SEGMENTED_CONTROL") {
                 line.remove("SEGMENTED_CONTROL")

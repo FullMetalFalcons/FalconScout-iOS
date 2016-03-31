@@ -26,7 +26,7 @@ class ViewSlider : CustomView {
         self.slider.minimumValue = Float(lowerBound)
         self.slider.maximumValue = Float(upperBound)
         self.addSubview(self.slider)
-        self.slider.addTarget(self, action: "changed:", forControlEvents: UIControlEvents.ValueChanged)
+        self.slider.addTarget(self, action: #selector(ViewSlider.changed(_:)), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     func changed(sender: UISlider) {

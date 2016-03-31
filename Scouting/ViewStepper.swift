@@ -21,11 +21,11 @@ class ViewStepper: CustomView {
 
         ViewControllerScout.arrayStepperViews.append(self)
         self.label = UILabel(frame: CGRect(x: self.frame.minX + 5, y: 5, width: self.frame.width * (1/2), height: self.frame.height))
-        self.label.font = UIFont.systemFontOfSize(CustomView.textSize)
+        self.label.font = UIFont.systemFontOfSize(CustomView.textSize - 3)
         self.label.text = "\(title): \(Int(stepper.value))"
         self.addSubview(self.label)
         
-        self.stepper.addTarget(self, action: Selector("changed:"), forControlEvents: UIControlEvents.ValueChanged)
+        self.stepper.addTarget(self, action: #selector(ViewStepper.changed(_:)), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     func changed(stepper: UIStepper) {

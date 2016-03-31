@@ -53,12 +53,12 @@ class ViewControllerMain: UIViewController {
             ViewControllerRequest.instance = storyboard.instantiateViewControllerWithIdentifier("Request") as! ViewControllerRequest
             isFirstLaunch = false
         }
-        self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: "closeKeyboard:")
+        self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: #selector(ViewControllerMain.closeKeyboard(_:)))
         self.view.addGestureRecognizer(self.gestureCloseKeyboard)
         self.txtPasskey.keyboardType = UIKeyboardType.NamePhonePad
         self.txtPasskey.delegate = ViewTextField(title: "passkey", key: "", type: "normal")
-        self.btnScout.addTarget(self, action: "btnStartScouting:event:", forControlEvents: UIControlEvents.TouchDown)
-        self.btnRetrieveData.addTarget(self, action: "btnStartRetrievingData:event:", forControlEvents: UIControlEvents.TouchDown)
+        self.btnScout.addTarget(self, action: #selector(ViewControllerMain.btnStartScouting(_:event:)), forControlEvents: UIControlEvents.TouchDown)
+        self.btnRetrieveData.addTarget(self, action: #selector(ViewControllerMain.btnStartRetrievingData(_:event:)), forControlEvents: UIControlEvents.TouchDown)
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
     }
     
@@ -169,7 +169,7 @@ class ViewControllerMain: UIViewController {
         self.view.endEditing(true)
     }
     
-    func sendData() {
+    @objc func sendData() {
         if self.connectedAndSubscribed {
             if dataToSend == nil {
                 if KEYS[K_TEAM_NUMBER] as! Int == 0 {

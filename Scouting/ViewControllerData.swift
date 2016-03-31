@@ -13,7 +13,9 @@ class ViewControllerData: UIViewController, UITableViewDelegate, UITableViewData
     
     var sendData: NSData!
     var teamDictionary: NSDictionary!
-    var teamArr = [(key: AnyObject, value: AnyObject)]()
+    var teamArrUnsorted = [(key: AnyObject, value: AnyObject)]()
+    var teamArrKeysTemp = [AnyObject]()
+    var teamArrSorted = [(key: AnyObject, value: AnyObject)]()
     var teamNum: String!
     var gestureCloseKeyboard: UITapGestureRecognizer!
     
@@ -25,14 +27,32 @@ class ViewControllerData: UIViewController, UITableViewDelegate, UITableViewData
             print("No Team dictionary")
             return
         }
-        self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: "closeKeyboard:")
+        self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: #selector(ViewControllerData.closeKeyboard(_:)))
         self.view.addGestureRecognizer(self.gestureCloseKeyboard)
         
         for (_, val) in self.teamDictionary.enumerate() {
-            print("ADD: index to \(val)")
-            teamArr.append(val)
+            teamArrUnsorted.append(val)
+            teamArrKeysTemp.append(val.key)
         }
         
+        teamArrKeysTemp = teamArrKeysTemp.sort({
+            one, two -> Bool in
+            let s0 = "\(one)"
+            let s1 = "\(two)"
+            return s0 < s1
+        })
+        
+        for (index, key) in self.teamArrKeysTemp.enumerate() {
+            var key = "\(key)"
+            key.replaceRange(key.startIndex...key.startIndex, with: "\(key.characters.first!)".uppercaseString)
+            let parts = key.componentsSeparatedByString("_")
+            key = ""
+            for part in parts {
+                key += " \(part)"
+            }
+            teamArrSorted.append((key, self.teamArrUnsorted[index].value))
+            print("\(key)=\(self.teamArrUnsorted[index].value)")
+        }
         self.tableView.delegate = self
         self.tableView.dataSource = self
         
@@ -46,21 +66,22 @@ class ViewControllerData: UIViewController, UITableViewDelegate, UITableViewData
     
         var cell = UITableViewCell(style: UITableViewCellStyle.Default, reuseIdentifier: "")
         let index = indexPath.row
-        let col = self.teamArr[index].key
-        var colStr = "\(col)"
-
+        let col = self.teamArrSorted[index].key
+        let colStr = "\(col)"
+        var colRawStr = "\(self.teamArrKeysTemp[index])"
+        
         var raw: String!
         var percent: String!
-        if colStr.hasSuffix("_yes") || colStr.hasSuffix("_no") {
-            self.trimYesOrNo(&colStr)
-            let keyTrimY = "\(colStr)_yes"
-            let keyTrimN = "\(colStr)_no"
+        if colStr.hasSuffix("yes") || colStr.hasSuffix("no") {
+            self.trimYesOrNo(&colRawStr)
+            let keyTrimY = "\(colRawStr)_yes"
+            let keyTrimN = "\(colRawStr)_no"
             let doubleY = Double("\(self.teamDictionary[keyTrimY]!)")!
             let doubleN = Double("\(self.teamDictionary[keyTrimN]!)")!
             raw =  "\(doubleY / (doubleY + doubleN))"
             percent =  "\(doubleY / (doubleY + doubleN) * 100)"
         } else {
-            raw = "\(self.teamArr[index].value)"
+            raw = "\(self.teamArrSorted[index].value)"
             if raw.hasSuffix("}") {
                 raw.remove("}")
                 raw.remove("{")
@@ -110,11 +131,12 @@ class ViewControllerData: UIViewController, UITableViewDelegate, UITableViewData
     func build(inout cell: UITableViewCell, col: String, raw: String, percent: String) {
         var lbls = [UILabel]()
         let tableWidth = self.tableView.frame.width
-        lbls.append(UILabel(frame: CGRect(x: 0, y: 0, width: tableWidth / 3, height: cell.frame.height)))
+        lbls.append(UILabel(frame: CGRect(x: 0, y: 0, width: tableWidth / 1.5, height: cell.frame.height)))
         lbls.append(UILabel(frame: CGRect(x: tableWidth / 3, y: 0, width: tableWidth / 3, height: cell.frame.height)))
         lbls.append(UILabel(frame: CGRect(x: tableWidth * (2/3), y: 0, width: tableWidth / 3, height: cell.frame.height)))
         lbls[0].text = col
         lbls[0].textAlignment = NSTextAlignment.Left
+        lbls[0].font = UIFont.systemFontOfSize(10)
         lbls[1].text = raw
         lbls[1].textAlignment = NSTextAlignment.Center
         lbls[2].text = percent

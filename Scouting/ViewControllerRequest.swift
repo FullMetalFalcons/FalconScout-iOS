@@ -9,7 +9,7 @@
 import UIKit
 import CoreBluetooth
 
-class ViewControllerRequest: UIViewController, UIPickerViewDelegate, UITextFieldDelegate,UIPickerViewDataSource {
+class ViewControllerRequest: UIViewController, UITextFieldDelegate {
     internal static var instance: ViewControllerRequest!
     
     @IBOutlet var textFields: [UITextField]!
@@ -17,6 +17,7 @@ class ViewControllerRequest: UIViewController, UIPickerViewDelegate, UITextField
     
     var currentTextFieldIndex = -1
     var gestureCloseKeyboard: UITapGestureRecognizer!
+    var requestTeamsStr = "raw;;key;;sign;;value"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -27,7 +28,7 @@ class ViewControllerRequest: UIViewController, UIPickerViewDelegate, UITextField
         textFields[0].keyboardType = UIKeyboardType.NumberPad
         textFields[4].keyboardType = UIKeyboardType.DecimalPad
         
-        self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: "closeKeyboard:")
+        self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: #selector(ViewControllerRequest.closeKeyboard(_:)))
         self.view.addGestureRecognizer(self.gestureCloseKeyboard)
     }
     
@@ -39,7 +40,7 @@ class ViewControllerRequest: UIViewController, UIPickerViewDelegate, UITextField
             let regex = try NSRegularExpression(pattern: "\\[(.*?)\\]", options: NSRegularExpressionOptions.AllowCommentsAndWhitespace)
             
             let parts = regex.matchesInString(data, options: NSMatchingOptions.ReportCompletion, range: NSMakeRange(0, data.characters.count))
-
+            
             let pieces: [String] = parts.map({
                 result in
                 (data as NSString).substringWithRange(result.range)
@@ -57,35 +58,27 @@ class ViewControllerRequest: UIViewController, UIPickerViewDelegate, UITextField
             alert("Could not read the data the computer sent")
         }
     }
-    
-    func numberOfComponentsInPickerView(pickerView: UIPickerView) -> Int {
-        return 1
-    }
-    
-    func pickerView(pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        
-        switch self.currentTextFieldIndex {
-        case 1: return 2
-        case 2: return 0
-            //Return number of keys
-        case 3: return 5
-        default: return 0
-        }
-    }
-    
-    func pickerView(pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return "Test"
-    }
+
     
     @IBAction func btnSearchTeamPressed(sender: UIButton) {
         self.loadingSpinner.hidden = false
         self.loadingSpinner.startAnimating()
-        ViewControllerMain.instance.peripheralManager.updateValue(textFields[0].text!.dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: CHARACTERISTIC_DB, onSubscribedCentrals: nil)
+        let teamNum = textFields[0].text!
+        let requestStr = "n::\(teamNum)"
+        print("TEAM string: \(requestStr)")
+        ViewControllerMain.instance.peripheralManager.updateValue(requestStr.dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: CHARACTERISTIC_DB, onSubscribedCentrals: nil)
         
     }
     
     @IBAction func btnSearchInfoPressed(sender: UIButton) {
-        
+        let p1 = textFields[1].text == "Average" ? "average" : "raw"
+        let p2 = textFields[2].text!
+        let p3 = textFields[3].text!
+        let p4 = textFields[4].text!
+        let teamsInfo = "\(p1);;\(p2);;\(p3);;\(p4)"
+        let requestStr = "i::\(teamsInfo)"
+        print("INFO string: \(requestStr)")
+        ViewControllerMain.instance.peripheralManager.updateValue(requestStr.dataUsingEncoding(NSUTF8StringEncoding)!, forCharacteristic: CHARACTERISTIC_DB, onSubscribedCentrals: nil)
     }
     
     func textFieldDidBeginEditing(textField: UITextField) {
@@ -94,10 +87,22 @@ class ViewControllerRequest: UIViewController, UIPickerViewDelegate, UITextField
             self.currentTextFieldIndex = 0
         case textFields[1]:
             self.currentTextFieldIndex = 1
+            self.getPickerChoice(["Raw value", "Average"], title: "Which type of data to look at?", completion: {
+                val in
+                self.textFields[1].text = val
+            })
         case textFields[2]:
             self.currentTextFieldIndex = 2
+            self.getPickerChoice(FileUtil.allKeys, title: "Select key", completion: {
+                val in
+                self.textFields[2].text = val
+            })
         case textFields[3]:
             self.currentTextFieldIndex = 3
+            self.getPickerChoice([">", "<", "≥", "≤", "="], title: "Select the operator for comparison", completion: {
+                val in
+                self.textFields[3].text = val
+            })
         case textFields[4]:
             self.currentTextFieldIndex = 4
         default:
@@ -120,6 +125,20 @@ class ViewControllerRequest: UIViewController, UIPickerViewDelegate, UITextField
     
     func closeKeyboard(sender: UITapGestureRecognizer) {
         self.view.endEditing(true)
+    }
+    
+    func getPickerChoice(items: [String], title: String, completion: String -> ()) {
+        self.view.endEditing(true)
+        let pickerVC = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Picker") as! ViewControllerPicker
+        self.presentViewController(pickerVC, animated: true, completion: {
+            pickerVC.initialize(items: items, title: title, completion: {
+                completion(pickerVC.retValue!)
+            })
+        })
+    }
+    
+    func reinstantiate() {
+        ViewControllerRequest.instance = UIStoryboard(name: "Main", bundle: nil).instantiateViewControllerWithIdentifier("Request") as! ViewControllerRequest
     }
     
     override func prefersStatusBarHidden() -> Bool {

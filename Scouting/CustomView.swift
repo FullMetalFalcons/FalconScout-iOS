@@ -23,11 +23,33 @@ class CustomView: UIView {
         super.init(frame: CGRect(x: Int(ViewControllerMain.instance.view.frame.minX), y: CustomView.nextAvailableY, width: Int(ViewControllerMain.instance.view.frame.width), height: CustomView.height))
         CustomView.nextAvailableY += CustomView.height
         self.backgroundColor = CustomView.colorBlueForView
-    
     }
-
+    
     func add() {
         ViewControllerScout.instance.scrollView.addSubview(self)
+    }
+    
+    class func getAllViews() -> [CustomView] {
+        var views = [CustomView]()
+        for switchView in ViewControllerScout.arraySwitchViews {
+            views.append(switchView)
+        }
+        for lblView in ViewControllerScout.arrayLabelViews {
+            views.append(lblView)
+        }
+        for segCtrView in ViewControllerScout.arraySegCtrlViews {
+            views.append(segCtrView)
+        }
+        for txtFieldView in ViewControllerScout.arrayTextFieldViews {
+            views.append(txtFieldView)
+        }
+        for sliderView in ViewControllerScout.arraySliderViews {
+            views.append(sliderView)
+        }
+        for stepperView in ViewControllerScout.arrayStepperViews {
+            views.append(stepperView)
+        }
+        return views
     }
     
     required init?(coder aDecoder: NSCoder) {

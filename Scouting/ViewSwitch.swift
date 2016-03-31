@@ -26,7 +26,7 @@ class ViewSwitch: CustomView {
             s.setOn(false, animated: true)
             KEYS[self.keys[index]] = "No"
             self.switches.append(s)
-            s.addTarget(self, action: "valueChanged:", forControlEvents: UIControlEvents.ValueChanged)
+            s.addTarget(self, action: #selector(ViewSwitch.valueChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
             let lbl = UILabel(frame: CGRect(x: s.frame.minX + CGFloat(50 * (1 / keys.count)), y: 0, width: width, height: 17.5))
             lbl.text = name
             lbl.font = UIFont.systemFontOfSize(CustomView.textSize - (CGFloat(keys.count)))

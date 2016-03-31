@@ -24,7 +24,7 @@ class ViewSegCtrl: CustomView {
         self.segCtrl = UISegmentedControl(items: elements)
         self.segCtrl.frame = CGRect(x: self.frame.minX + 7.5, y: self.frame.height * (2/5), width: self.frame.width - 15, height: self.frame.height * (4/7))
         self.addSubview(self.segCtrl)
-        self.segCtrl.addTarget(self, action: Selector("changed:"), forControlEvents: UIControlEvents.ValueChanged)
+        self.segCtrl.addTarget(self, action: #selector(ViewSegCtrl.changed(_:)), forControlEvents: UIControlEvents.ValueChanged)
     }
     
     func changed(segCtrl: UISegmentedControl) {
@@ -38,7 +38,7 @@ class ViewSegCtrl: CustomView {
 }
 
 extension ViewSegCtrl {
-    func segTeamColorChanged(sender: UISegmentedControl) {
+    @objc func segTeamColorChanged(sender: UISegmentedControl) {
         switch sender.selectedSegmentIndex {
         case 0:
             ViewControllerScout.instance.setColor(UIColor.blueColor())
