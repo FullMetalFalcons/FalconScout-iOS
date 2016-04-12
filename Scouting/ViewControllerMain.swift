@@ -51,12 +51,15 @@ class ViewControllerMain: UIViewController {
             ViewControllerScout.instance = storyboard.instantiateViewControllerWithIdentifier("Scout") as! ViewControllerScout
             ViewControllerData.instance = storyboard.instantiateViewControllerWithIdentifier("Data") as! ViewControllerData
             ViewControllerRequest.instance = storyboard.instantiateViewControllerWithIdentifier("Request") as! ViewControllerRequest
+            ViewControllerScout.instance.initialize()
             isFirstLaunch = false
         }
         self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: #selector(ViewControllerMain.closeKeyboard(_:)))
         self.view.addGestureRecognizer(self.gestureCloseKeyboard)
+        
         self.txtPasskey.keyboardType = UIKeyboardType.NamePhonePad
-        self.txtPasskey.delegate = ViewTextField(title: "passkey", key: "", type: "normal")
+        self.txtPasskey.delegate = self//ViewTextField(title: "passkey", key: "", type: "normal")
+
         self.btnScout.addTarget(self, action: #selector(ViewControllerMain.btnStartScouting(_:event:)), forControlEvents: UIControlEvents.TouchDown)
         self.btnRetrieveData.addTarget(self, action: #selector(ViewControllerMain.btnStartRetrievingData(_:event:)), forControlEvents: UIControlEvents.TouchDown)
         self.peripheralManager = CBPeripheralManager(delegate: self, queue: nil, options: nil)
@@ -109,18 +112,16 @@ class ViewControllerMain: UIViewController {
         let green:CGFloat = CGFloat(pixel[1])/255.0
         let blue:CGFloat = CGFloat(pixel[2])/255.0
         let alpha:CGFloat = CGFloat(pixel[3])/255.0
-        
         let color = UIColor(red:red, green: green, blue:blue, alpha:alpha)
-        
         return color.CGColor
     }
 
     @IBAction func btnRefresh(sender: UIButton) {
-        print("Refreshing...")
         self.refresh(self.passkey)
     }
     
     func refresh(passkey: String) {
+        print("Refresh")
         self.btnRefresh.startRotating(1)
         self.btnRefresh.enabled = false
         NSTimer.scheduledTimerWithTimeInterval(2, repeats: false, block: {
@@ -239,3 +240,22 @@ class ViewControllerMain: UIViewController {
     }
 }
 
+extension ViewControllerMain: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.superview!.endEditing(true)
+        return true
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        switch textField {
+        case self.txtPasskey:
+            self.refresh(textField.text!)
+        default: break
+        }
+    }
+}

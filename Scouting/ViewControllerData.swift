@@ -8,10 +8,10 @@
 
 import UIKit
 
+
 class ViewControllerData: UIViewController, UITableViewDelegate, UITableViewDataSource {
     internal static var instance: ViewControllerData!
     
-    var sendData: NSData!
     var teamDictionary: NSDictionary!
     var teamArrUnsorted = [(key: AnyObject, value: AnyObject)]()
     var teamArrKeysTemp = [AnyObject]()

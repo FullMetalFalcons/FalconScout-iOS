@@ -15,8 +15,10 @@ public let UUID_CHARACTERISTIC_ROBOT: CBUUID = CBUUID(string: "20D0C428-B763-401
 public let UUID_CHARACTERISTIC_DB: CBUUID = CBUUID(string: "80A37B7F-0563-409B-B320-8C1768CE6A58")
 public let NOTIFY_MTU: NSInteger = 75
 
+var sendBackData: NSData!
+
 public let CHARACTERISTIC_ROBOT = CBMutableCharacteristic(type: UUID_CHARACTERISTIC_ROBOT, properties: CBCharacteristicProperties.Notify, value: ViewControllerMain.instance.dataToSend, permissions: CBAttributePermissions.Readable)
-public let CHARACTERISTIC_DB  = CBMutableCharacteristic(type: UUID_CHARACTERISTIC_DB, properties: CBCharacteristicProperties(rawValue: CBCharacteristicProperties.Notify.rawValue | CBCharacteristicProperties.Write.rawValue), value: ViewControllerData.instance.sendData, permissions: CBAttributePermissions.Writeable)
+public let CHARACTERISTIC_DB  = CBMutableCharacteristic(type: UUID_CHARACTERISTIC_DB, properties: CBCharacteristicProperties(rawValue: CBCharacteristicProperties.Notify.rawValue | CBCharacteristicProperties.Write.rawValue), value: sendBackData, permissions: CBAttributePermissions.Writeable)
 
 let K_TEAM_NUMBER = "team_num"
 let K_MATCH_NUMBER = "match_num"

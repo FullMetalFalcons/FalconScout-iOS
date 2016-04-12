@@ -26,25 +26,36 @@ class ViewControllerScout: UIViewController {
     internal static var arraySwitchViews: [ViewSwitch] = [ViewSwitch]()
     internal static var arraySliderViews: [ViewSlider] = [ViewSlider]()
     internal static var arraySpaceViews: [CustomView] = [CustomView]()
+    internal static var arrayAllViews: [CustomView] = [CustomView]()
     
+    internal static var prettyToKey: [String : String] = [String : String]()
+    internal static var allPotentialKeys: [String] = [String]()
+    internal static var allPrettyKeys: [String] = [String]()
     override func viewDidLoad() {
         super.viewDidLoad()
+        print("Scout VC appeared")
         self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: #selector(ViewControllerScout.closeKeyboard(_:)))
-        print("Loaded Scout View Controller")
         self.scrollView.addGestureRecognizer(self.gestureCloseKeyboard)
         self.scrollView.contentSize.height = CGFloat(FileUtil.fileContentsTrimmed.count * CustomView.height) + (self.btnDone.frame.height * 3) + self.segTeamColor.frame.origin.y + 5
-        CustomView.nextAvailableY = Int(self.segTeamColor.frame.origin.y / 2)
+        
         self.btnDone.frame = CGRect(x: self.btnDone.frame.origin.x, y: self.scrollView.contentSize.height - self.btnDone.frame.height - 5, width: self.btnDone.frame.width, height: self.btnDone.frame.height)
         self.btnDone.addTarget(ViewControllerMain.instance, action: #selector(ViewControllerMain.instance.sendData(_:)), forControlEvents: UIControlEvents.TouchDown)
-//        "sendData:"
         self.txtTeamNum.keyboardType = UIKeyboardType.NumberPad
         self.txtMatchNum.keyboardType = UIKeyboardType.NumberPad
-        self.txtTeamNum.delegate = ViewTextField(title: "teamnum", key: "", type: "number")
-        self.txtMatchNum.delegate = ViewTextField(title: "matchnum", key: "", type: "number")
-        let vscInstance = ViewSegCtrl(title: "teamcolor", key: "", elements: ["Red", "Blue"])
-        self.segTeamColor.addTarget(vscInstance, action: #selector(vscInstance.segTeamColorChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
+        self.txtTeamNum.delegate = self
+        self.txtMatchNum.delegate = self
+        self.segTeamColor.addTarget(self, action: #selector(self.segTeamColorChanged(_:)), forControlEvents: UIControlEvents.ValueChanged)
         self.segTeamColor.selectedSegmentIndex = 0
-        //"segTeamColorChanged:"
+        for view in ViewControllerScout.arrayAllViews {
+            view.add()
+        }
+        self.scrollView.backgroundColor = CustomView.colorBlueForView
+        self.setColor(UIColor.blueColor())
+    }
+    
+    func initialize() {
+        print("Initializing Scout View Controller")
+        CustomView.nextAvailableY = Int(ViewControllerMain.instance.btnRefresh.frame.origin.y + 25)
         for var line in FileUtil.fileContentsTrimmed {
             if line.hasPrefix("SEGMENTED_CONTROL") {
                 line.remove("SEGMENTED_CONTROL")
@@ -53,7 +64,14 @@ class ViewControllerScout: UIViewController {
                     self.failedToBuildInterface("Malformed text file in a SEGMENTED_CONTROL")
                     return
                 }
-                self.addSegmentedControl(parts[1].trim(), key: parts[2].trim(), elements: parts[0].cleanupArgs())
+                
+                var elements = parts[0].cleanupArgs()
+                for i in 0..<elements.count {
+                    elements[i] = elements[i].trim()
+                }
+                let s = ViewSegCtrl(title: parts[1].trim(), key: parts[2].trim(), elements: elements)
+                ViewControllerScout.arraySegCtrlViews.append(s)
+                ViewControllerScout.arrayAllViews.append(s)
             } else if line.hasPrefix("TEXTFIELD") {
                 line.remove("TEXTFIELD")
                 var parts = line.componentsSeparatedByString(";;")
@@ -66,7 +84,9 @@ class ViewControllerScout: UIViewController {
                     self.failedToBuildInterface("Malformed TEXTFIELD arguments")
                     return
                 }
-                self.addTextfield(parts[1].trim(), key: parts[2].trim(), type: args[0])
+                let t = ViewTextField(title: parts[1].trim(), key: parts[2].trim(), type: args[0])
+                ViewControllerScout.arrayTextFieldViews.append(t)
+                ViewControllerScout.arrayAllViews.append(t)
             } else if line.hasPrefix("STEPPER") {
                 line.remove("STEPPER")
                 var parts = line.componentsSeparatedByString(";;")
@@ -79,7 +99,9 @@ class ViewControllerScout: UIViewController {
                     self.failedToBuildInterface("Malformed STEPPER arguments")
                     return
                 }
-                self.addStepper(parts[1].trim(), key: parts[2].trim(), lowerBound: Int(args[0])!, upperBound: Int(args[1])!)
+                let s = ViewStepper(title: parts[1].trim(), key: parts[2].trim(), lowerBound: Int(args[0])!, upperBound: Int(args[1])!)
+                ViewControllerScout.arrayStepperViews.append(s)
+                ViewControllerScout.arrayAllViews.append(s)
             } else if line.hasPrefix("LABEL") {
                 line.remove("LABEL")
                 var parts = line.componentsSeparatedByString(";;")
@@ -92,7 +114,9 @@ class ViewControllerScout: UIViewController {
                     self.failedToBuildInterface("Malformed LABEL arguments")
                     return
                 }
-                self.addLabel(parts[1].trim(), type: args[0], justification: args[1])
+                let l = ViewLabel(title: parts[1].trim(), type: args[0], justification: args[1])
+                ViewControllerScout.arrayLabelViews.append(l)
+                ViewControllerScout.arrayAllViews.append(l)
             } else if line.hasPrefix("SWITCH") {
                 line.remove("SWITCH")
                 var parts = line.componentsSeparatedByString(";;")
@@ -110,7 +134,9 @@ class ViewControllerScout: UIViewController {
                     self.failedToBuildInterface("Too many switches, cancelling switch view creation")
                     return
                 }
-                self.addSwitches(keys: argKeys, names: argTitles)
+                let s = ViewSwitch(title: "", keys: argKeys, switchTitles: argTitles)
+                ViewControllerScout.arraySwitchViews.append(s)
+                ViewControllerScout.arrayAllViews.append(s)
             } else if line.hasPrefix("SLIDER") {
                 line.remove("SLIDER")
                 var parts = line.componentsSeparatedByString(";;")
@@ -123,15 +149,15 @@ class ViewControllerScout: UIViewController {
                     self.failedToBuildInterface("Malformed text file in SLIDER arguments")
                     return
                 }
-                self.addSlider(Int(args[0])!, upperBound: Int(args[1])!, title: parts[1].trim(), key: parts[2].trim())
+                let s = ViewSlider(lowerBound: Int(args[0])!, upperBound: Int(args[1])!, title: parts[1].trim(), key: parts[2].trim())
+                ViewControllerScout.arraySliderViews.append(s)
+                ViewControllerScout.arrayAllViews.append(s)
             } else if line.hasPrefix("SPACE"){
-                self.addSpace()
+                let s = CustomView(title: "", key: "")
+                ViewControllerScout.arraySpaceViews.append(s)
+                ViewControllerScout.arrayAllViews.append(s)
             }
-            
-            self.scrollView.backgroundColor = CustomView.colorBlueForView
         }
-        self.setColor(UIColor.blueColor())
-        
     }
     
     func failedToBuildInterface(error: String) {
@@ -162,43 +188,6 @@ class ViewControllerScout: UIViewController {
             alert(error)
         })
     }
-    
-    func addSegmentedControl(title: String, key: String, elements: [String]) {
-        print("Adding SEGMENTED CONTROL with title: \"\(title)\", key: \(key), parts: \(elements)")
-        ViewSegCtrl(title: title, key: key, elements: elements).add()
-    }
-    
-    func addTextfield(title: String, key: String, type: String) {
-        print("Adding TEXTFIELD with title: \"\(title)\", type: \(type)")
-        ViewTextField(title: title, key: key, type: type).add()
-    }
-    
-    func addStepper(title: String, key: String, lowerBound: Int, upperBound: Int) {
-        print("Adding STEPPER with title: \"\(title)\", key: \(key), bounds: (\(lowerBound),\(upperBound))")
-        ViewStepper(title: title, key: key, lowerBound: lowerBound, upperBound: upperBound).add()
-    }
-    
-    func addLabel(title: String, type: String, justification: String) {
-        print("Adding LABEL with title: \"\(title)\", type: \(type), justified: \(justification)")
-        ViewLabel(title: title, type: type, justification: justification).add()
-    }
-    
-    func addSwitches(keys keys: [String], names: [String]) {
-        print("Adding SWITCHES with names: \(names), key: \(keys)")
-        ViewSwitch(title: "", keys: keys, switchTitles: names).add()
-    }
-    
-    func addSlider(lowerBound: Int, upperBound: Int, title: String, key: String) {
-        print("Adding SLIDER with bounds: (\(lowerBound), \(upperBound)),title: \(title), key: \(key)")
-        ViewSlider(lowerBound: lowerBound, upperBound: upperBound, title: title, key: key).add()
-    }
-    
-    func addSpace() {
-        let spaceView = CustomView(title: "", key: "")
-        ViewControllerScout.arraySpaceViews.append(spaceView)
-        spaceView.add()
-    }
-    
     
     func setColor(color: UIColor) {
         self.segTeamColor.tintColor = color
@@ -239,7 +228,7 @@ class ViewControllerScout: UIViewController {
         for stepperView in ViewControllerScout.arrayStepperViews {
             stepperView.stepper.value = 0
             stepperView.changed(stepperView.stepper)
-            KEYS[stepperView.key] = stepperView.stepper.value
+            KEYS[stepperView.key] = Int(stepperView.stepper.value)
         }
         for switchView in ViewControllerScout.arraySwitchViews {
             for (index, sw) in switchView.switches.enumerate() {
@@ -261,6 +250,20 @@ class ViewControllerScout: UIViewController {
         KEYS[K_MATCH_NUMBER] = 0
     }
     
+    func segTeamColorChanged(sender: UISegmentedControl) {
+        print("Team color is: \(sender.titleForSegmentAtIndex(sender.selectedSegmentIndex)!)")
+        switch sender.selectedSegmentIndex {
+        case 0:
+            self.setColor(UIColor.blueColor())
+            self.setViewColor(CustomView.colorBlueForView)
+            KEYS[K_TEAM_COLOR] = "Blue"
+        case 1:
+            self.setColor(UIColor.redColor())
+            self.setViewColor(CustomView.colorRedForView)
+            KEYS[K_TEAM_COLOR] = "Red"
+        default: return
+        }
+    }
     
     func reset() {
         KEYS.removeAllObjects()
@@ -314,5 +317,49 @@ class ViewControllerScout: UIViewController {
     
     override func prefersStatusBarHidden() -> Bool {
         return true
+    }
+}
+
+extension ViewControllerScout: UITextFieldDelegate {
+    func textFieldShouldReturn(textField: UITextField) -> Bool {
+        textField.superview!.endEditing(true)
+        return true
+    }
+    
+    func textField(textField: UITextField, shouldChangeCharactersInRange range: NSRange, replacementString string: String) -> Bool {
+        return true
+    }
+    
+    func textFieldDidEndEditing(textField: UITextField) {
+        switch textField {
+        case self.txtTeamNum:
+            if let teamNum = Int(textField.text!) {
+                if teamNum > 9999 {
+                    alert("That number is too big")
+                    textField.text = ""
+                } else {
+                    print("team num is \(textField.text!)")
+                    KEYS[K_TEAM_NUMBER] = teamNum
+                }
+            } else {
+                alert("That is not a number")
+                textField.text = ""
+            }
+        case self.txtMatchNum:
+            if let matchNum = Int(textField.text!) {
+                if matchNum > 200 {
+                    alert("There is no way this is match \(matchNum)")
+                    textField.text = ""
+                } else {
+                    KEYS[K_MATCH_NUMBER] = matchNum
+                    print("match num is \(textField.text!)")
+                }
+            } else {
+                alert("That is not a number")
+                textField.text = ""
+            }
+        default:
+            break
+        }
     }
 }

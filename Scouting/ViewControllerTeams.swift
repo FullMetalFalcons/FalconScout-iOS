@@ -11,6 +11,8 @@ import UIKit
 class ViewControllerTeams: UIViewController {
     internal static var instance: ViewControllerTeams!
     
+    @IBOutlet var tableView: UITableView!
+    
     override func viewDidLoad() {
         super.viewDidLoad()
     }

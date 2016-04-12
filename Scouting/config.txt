@@ -64,7 +64,7 @@
 LABEL 				<distinguished, center>;;				Autonomous
 SEGMENTED_CONTROL	<No,Yes>;;								Reaches defenses?;;								aut_reaches_defenses
 SEGMENTED_CONTROL 	<None,A,B,C,D,Low bar>;;				Which type of defense does the robot cross?;;	aut_crossesDefense
-SEGMENTED_CONTROL 	<No, Missed shot, Yes>;;				Does is shoot and score? (low or high goal);;	aut_shooting
+SEGMENTED_CONTROL 	<No,Missed shot,Yes>;;					Does is shoot and score? (low or high goal);;	aut_shooting
 SLIDER 				<0,10>;;								Shot Accuracy;;									aut_shot_accuracy
 
 LABEL 				<distinguished, center>;;				TeleOp

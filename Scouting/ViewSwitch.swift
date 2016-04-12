@@ -33,8 +33,9 @@ class ViewSwitch: CustomView {
             lbl.textAlignment = NSTextAlignment.Left
             self.addSubview(lbl)
             self.addSubview(s)
+            ViewControllerScout.allPotentialKeys.append("\(self.keys[index])_yes")
+            ViewControllerScout.allPotentialKeys.append("\(self.keys[index])_no")
         }
-        ViewControllerScout.arraySwitchViews.append(self)
     }
     
     func valueChanged(sender: UISwitch) {

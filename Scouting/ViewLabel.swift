@@ -12,9 +12,7 @@ class ViewLabel: CustomView {
     var label: UILabel!
     
     init(title: String, type: String, justification: String) {
-        super.init(title: title, key: "")
-        ViewControllerScout.arrayLabelViews.append(self)
-        
+        super.init(title: title, key: "")        
         self.label = UILabel(frame: CGRect(x:  self.frame.minX, y: 5, width: self.frame.width, height: self.frame.height * (3/4)))
         self.label.text = title
         self.label.font = UIFont.systemFontOfSize(CustomView.textSize)

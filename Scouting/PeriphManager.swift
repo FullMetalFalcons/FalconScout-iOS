@@ -10,8 +10,8 @@ import CoreBluetooth
 import UIKit
 
 /**
-Bluetooth peripheral manager class. See apple documentation for method info
-*/
+ Bluetooth peripheral manager class. See apple documentation for method info
+ */
 private var dataStr = ""
 extension ViewControllerMain: CBPeripheralManagerDelegate {
     
@@ -87,8 +87,11 @@ extension ViewControllerMain: CBPeripheralManagerDelegate {
             peripheral.respondToRequest(request, withResult: CBATTError.Success)
             let rStr = NSString(data: request.value!, encoding: NSUTF8StringEncoding)!
             switch rStr {
-            case "EOM":
+            case "EOM+TEAM":
                 ViewControllerRequest.instance.showSummaryWithStringData(dataStr)
+                dataStr = ""
+            case "EOM+INFO":
+                ViewControllerRequest.instance.showInfoWithStringData(dataStr)
                 dataStr = ""
             case "NoReadTable":
                 ViewControllerRequest.instance.loadingSpinner.stopAnimating()
@@ -96,6 +99,9 @@ extension ViewControllerMain: CBPeripheralManagerDelegate {
             case "NoReadTeam":
                 ViewControllerRequest.instance.loadingSpinner.stopAnimating()
                 alert("That team could not be found on the computer's database")
+            case "NoReadInfo":
+                ViewControllerRequest.instance.loadingSpinner.stopAnimating()
+                alert("The computer couldn't search for that information")
             default:
                 dataStr += rStr
             }

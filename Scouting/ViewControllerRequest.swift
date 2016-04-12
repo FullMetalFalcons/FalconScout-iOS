@@ -30,6 +30,31 @@ class ViewControllerRequest: UIViewController, UITextFieldDelegate {
         
         self.gestureCloseKeyboard = UITapGestureRecognizer(target: self, action: #selector(ViewControllerRequest.closeKeyboard(_:)))
         self.view.addGestureRecognizer(self.gestureCloseKeyboard)
+        for key in ViewControllerScout.allPotentialKeys {
+            print("HAS KEY: \(key)")
+            let pkey = self.toPrettyKey(key)
+            ViewControllerScout.prettyToKey[pkey] = key
+            ViewControllerScout.allPrettyKeys.append(pkey)
+        }
+    }
+    
+    private func toPrettyKey(key: String) -> String {
+        var pts = key.componentsSeparatedByString("_")
+        pts[0] = pts[0].uppercaseString
+        for i in 1..<pts.count {
+            pts[i] = pts[i].capitalizedString
+        }
+        var f = ""
+        for pt in pts {
+            f += " \(pt)"
+        }
+        return f
+    }
+    
+    func showInfoWithStringData(data: String) {
+        self.loadingSpinner.stopAnimating()
+        self.loadingSpinner.hidden = true
+        
     }
     
     func showSummaryWithStringData(data: String) {
@@ -71,8 +96,8 @@ class ViewControllerRequest: UIViewController, UITextFieldDelegate {
     }
     
     @IBAction func btnSearchInfoPressed(sender: UIButton) {
-        let p1 = textFields[1].text == "Average" ? "average" : "raw"
-        let p2 = textFields[2].text!
+        let p1 = textFields[1].text == "Average" ? "avg" : "raw"
+        let p2 = ViewControllerScout.prettyToKey[textFields[2].text!]!
         let p3 = textFields[3].text!
         let p4 = textFields[4].text!
         let teamsInfo = "\(p1);;\(p2);;\(p3);;\(p4)"
@@ -93,7 +118,7 @@ class ViewControllerRequest: UIViewController, UITextFieldDelegate {
             })
         case textFields[2]:
             self.currentTextFieldIndex = 2
-            self.getPickerChoice(FileUtil.allKeys, title: "Select key", completion: {
+            self.getPickerChoice(ViewControllerScout.allPrettyKeys, title: "Select key", completion: {
                 val in
                 self.textFields[2].text = val
             })

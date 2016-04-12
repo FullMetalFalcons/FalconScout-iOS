@@ -14,8 +14,11 @@ class CustomView: UIView {
     internal static var nextAvailableY: Int = 0
     internal static var colorRedForView = UIColor(red: 1, green: 0, blue: 0, alpha: 0.1)
     internal static var colorBlueForView = UIColor(red: 0, green: 0, blue: 1, alpha: 0.1)
+
+    
     var title: String
     var key: String
+    var prettyKey: String!
     
     init(title: String, key: String) {
         self.title = title
@@ -50,6 +53,19 @@ class CustomView: UIView {
             views.append(stepperView)
         }
         return views
+    }
+    
+    internal class func prettyKey(key: String) -> String {
+        var parts = key.componentsSeparatedByString("_")
+        parts[0] = parts[0].uppercaseString
+        for i in 1..<parts.count {
+            parts[i] = parts[i].uppercaseString
+        }
+        var f = ""
+        for pt in parts {
+            f += " \(pt.trim())"
+        }
+        return f
     }
     
     required init?(coder aDecoder: NSCoder) {
